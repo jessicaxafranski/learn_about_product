@@ -1,4 +1,4 @@
-# Product Strate
+# Product Strategy
 
 * Building a Product Roadmap;
 * Product Backlog Building ;
