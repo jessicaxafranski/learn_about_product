@@ -1,6 +1,6 @@
 # Product Strategy
 
-* Building a Product Roadmap;
+* [Building a Product Roadmap](https://github.com/jessicaxafranski/learn_about_product/blob/main/build_pb.md)
 * Product Backlog Building ;
    * Prioritizing a PB;
 * How to create User stories; 
