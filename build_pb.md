@@ -92,7 +92,9 @@ You need to figure out the capacity and effort required of each team separately 
 
 If the answers for these questions are yes.  you have a straw man and can share your time 🤩💡📅
 
-<pre><code> "The purpose of the product roadmap is to align product stakeholders around the development pan that your roadmap represents." <pre><code>
+<pre><code>"The purpose of the product roadmap is to align product stakeholders around the development pan that your roadmap represents."</code></pre>
+
+
 
 **Fourth Step**
 
@@ -105,21 +107,40 @@ You should align the roadmap with the stakeholders, for this happen you should d
 - Ask the team what they wish was different
 - Modify the roadmap directly
 - Show the team the tradeoffs
-- Think about future sucess
+- Think about future success
 - Align the team with decision
 
-After the meeting everyone should be looking at the revised product roadmap in the spreadsheet and agreeing to support it publicly
+After the meeting, everyone should be looking at the revised product roadmap in the spreadsheet and agreeing to support it publicly
 
-## Common challegenges in a product roadmap
+## Common challenges in a product roadmap
 
-- Create a short presentation to show the key elements and decisions of the product roadmap
-- what are the top level business objectives
-- Who your target customers
+Recommending to create a short presentation to show the key elements and decisions of the product roadmap with these topics:
+
+- What are the top-level business objectives;
+- Who are your target customers; 
 - How can your product from the competition in the middle of the presentation should be 
 
-- Schedule one-on-one meeting: could be operations, customer service, technical support, finance, legal and so on. Explains the decisions made by the team and thinking behind
+And in the middle of your presentation, it's important a product roadmap diagram, which shows the periods on the X axis, different customers or product categories on the Y, and the milestones in the grid.
+
+**Important:**
+
+- Schedule one-on-one meetings: could be operations, customer service, technical support, finance, legal, and so on. Explains the decisions made by the team and the thinking behind
 - You have to raise them again to the whole group
-- Always present the roadmap as a team effort - “It’s not my roadmap and decide it’s our roadmap and WE decide it.”
+- Always present the roadmap as a team effort - “It’s not my roadmap and decides it’s our roadmap and WE decide it.”
 
+## When do I know it's time to update the roadmap?
 
-## Common challegenges in a product roadmap
+Try to understand the reason for change - sometimes exists something new, but the others that one of your team members is still not aligned. After that, you can analyze with these information:
+
+- Customer needs or desires
+- Competitor information 
+- Development time or cost 
+
+Building a Product Roadmap it's not too easy to do, but you need resilience and communication with all the stakeholders, the dev team, and UX. We can synthesize in three steps:
+
+|Steps | 
+|----- | 
+|STEP 1. Spend time with your customers|
+|STEP 2. Build your roadmap and share it|
+|STEP 3. Keep your roadmap relevant|
+
