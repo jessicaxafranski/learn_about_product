@@ -12,7 +12,6 @@ Customers, Customer-facing groups, Investors, board, sponsors, Architects, engin
 
 A roadmap milestone is a date signaling an event or deadline that the product manager wants the team to be aware of. These milestones might relate directly to the product's progress—such as a release date. They might also represent a date that the team needs to keep in mind as they work on the product.
 
-
 ## How Can I start a value milestone?
 
 You need to understand the impactfull in diffents ways to build a good Stratey for your milestone.
@@ -92,3 +91,35 @@ You need to figure out the capacity and effort required of each team separately 
 - Is it feasible from a development resource perspective?
 
 If the answers for these questions are yes.  you have a straw man and can share your time 🤩💡📅
+
+<pre><code> "The purpose of the product roadmap is to align product stakeholders around the development pan that your roadmap represents." <pre><code>
+
+**Fourth Step**
+
+You should align the roadmap with the stakeholders, for this happen you should do that:
+
+- Explain the goal
+- Quickly review your product strategy
+- Review the development capacity of your team
+- Walk through your product roadmap strawman
+- Ask the team what they wish was different
+- Modify the roadmap directly
+- Show the team the tradeoffs
+- Think about future sucess
+- Align the team with decision
+
+After the meeting everyone should be looking at the revised product roadmap in the spreadsheet and agreeing to support it publicly
+
+## Common challegenges in a product roadmap
+
+- Create a short presentation to show the key elements and decisions of the product roadmap
+- what are the top level business objectives
+- Who your target customers
+- How can your product from the competition in the middle of the presentation should be 
+
+- Schedule one-on-one meeting: could be operations, customer service, technical support, finance, legal and so on. Explains the decisions made by the team and thinking behind
+- You have to raise them again to the whole group
+- Always present the roadmap as a team effort - “It’s not my roadmap and decide it’s our roadmap and WE decide it.”
+
+
+## Common challegenges in a product roadmap
