@@ -14,7 +14,7 @@
 * How to create OKR'S and KPI's;
    * Monitoring KPI's
 * Why data-driven is important for your product?
-* Performace indicators
+* [Performance indicators](https://github.com/jessicaxafranski/learn_about_product/blob/main/performance_indicators.md) ⛏⛏
 
 # API's
 
