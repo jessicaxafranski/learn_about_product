@@ -14,6 +14,7 @@
 * How to create OKR'S and KPI's;
    * Monitoring KPI's
 * Why data-driven is important for your product?
+* Performace indicators
 
 # API's
 
