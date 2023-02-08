@@ -74,8 +74,21 @@ Now it's time to align with everybody.
 2) Schedule milestones
 
 
+For example: If my milestone requires 20 developer weeks and my time has five developers weeks of capacity for new feature development every week, we can assume that the milestone will be release in four weeks.
 
-Be continuous....:P
+- Identify high-piority milestones that can be completed together
+- Identify lower priority milestones for the second time period
+
+|Produt|Quarter 1| Quarter 2 | Quarter 3 | Quarter 4 | 
+|------|---------|-----------|---------|-------|
+|Mile 1   | Mile 3    | Mile 6  | Mile 8|
+|Mile 2   | Mile 4    | Mile 7  |       |
+|         | Mile 5    |         |       |
 
 
+You need to figure out the capacity and effort required of each team separately (BACK and Front)
 
+- Does it implement your product strategy?
+- Is it feasible from a development resource perspective?
+
+If the answers for these questions are yes.  you have a straw man and can share your time 🤩💡📅
