@@ -58,3 +58,14 @@ Inside of my indicators system It's necessary to know, what is data and what is 
 **Data:** Can be structured within our organization's databases and serve as the foundation for maintaining our indicators.
 
 **Information:** Surge due to data manipulation, Information is the sum of certain data, whose objective is to improve the quality of my decision-making.
+
+## Indicators
+
+Indicator is a information quantitative or qualitative that shows our performance of my process or product. Is the metric responsable to give us the result.
+
+**Qualitative:** the result is not measured, don't be number. Results like: good, bad, approve, repprove. They are represent with grafics 
+**Quantitative:** the result can be : %, integer number..
+
+**KPI (Key performance indicator)**:Key performance indicators (KPIs) are the most critical indicators chosen by a company to measure their desired outcomes.
+
+**Algorithm**: it is the heart of our indicator. The algorithm, or calculation formula, is integral to the indicator as it determines the accuracy of the results, which in turn impacts decision-making
