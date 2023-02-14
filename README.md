@@ -30,6 +30,10 @@ Internacional podcast:
 * How to create OKR'S and KPI's;
    * Monitoring KPI's
 
+# Data Lake and Metadata
+⛏⛏
+
+
 # API's
 
 * [What's the API?](https://github.com/jessicaxafranski/learn_about_product/blob/main/about_api.md)
