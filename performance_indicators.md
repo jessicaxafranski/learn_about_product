@@ -56,6 +56,5 @@ The indicators show a picture of our results.
 Inside of my indicators system It's necessary to know, what is data and what is information.
 
 **Data:** Can be structured within our organization's databases and serve as the foundation for maintaining our indicators.
+
 **Information:** Surge due to data manipulation, Information is the sum of certain data, whose objective is to improve the quality of my decision-making.
-
-
