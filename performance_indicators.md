@@ -69,3 +69,12 @@ Indicator is a information quantitative or qualitative that shows our performanc
 **KPI (Key performance indicator)**:Key performance indicators (KPIs) are the most critical indicators chosen by a company to measure their desired outcomes.
 
 **Algorithm**: it is the heart of our indicator. The algorithm, or calculation formula, is integral to the indicator as it determines the accuracy of the results, which in turn impacts decision-making
+
+## Performance
+
+When comparing results from indicators with different units, you need to standardize the results.
+
+* Achieving all objectives results in a performance of 100%.
+* Failing to achieve all objectives results in a performance of less than 100%.
+* Exceeding the goal results in a performance of greater than 100%.
+
