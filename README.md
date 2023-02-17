@@ -26,8 +26,9 @@ Internacional podcast:
 # Data and Metrics
 
 * [Why data-driven is important for your product?](https://github.com/jessicaxafranski/learn_about_product/blob/main/data_driven.md) 
-* [Performance indicators](https://github.com/jessicaxafranski/learn_about_product/blob/main/performance_indicators.md) ⛏⛏
-* How to create OKR'S and KPI's;
+* [Performance indicators](https://github.com/jessicaxafranski/learn_about_product/blob/main/performance_indicators.md);
+    
+   * [How to create KR'S](https://github.com/jessicaxafranski/learn_about_product/blob/main/create_KR.md)⛏⛏
    * Monitoring KPI's
 
 # Data Lake and Metadata
