@@ -1,4 +1,4 @@
-DRAFT GENERATIVE AI FOR PRODUCT MANAGERS - Course Linkedin
+# GENERATIVE AI FOR PRODUCT MANAGERS - Course LinkedIn
 
 All technological sectors are growing quickly. As a Product Manager, I often see posts on LinkedIn where people argue about the future of our profession and how AI might replace us. 
 I don't completely disagree with these points, but people tend to forget that humanity adapts, and as IT professionals, we need to evolve with our environment.
@@ -13,8 +13,6 @@ I aim to address all my doubts as a professional and do a mindmap to find a bett
 
 By Answering these questions, I understood what I needed to improve and learn, and I started looking for courses that could help me. 
 I discovered a LinkedIn course that answered all my questions.
-...........
-...........
 
 |Generative AI | PM|
 |-----------|--------------|
@@ -22,25 +20,25 @@ I discovered a LinkedIn course that answered all my questions.
 | The How | The emotional intelligence|
 
 
-Questions to consider
+## Questions to consider
 
 - What is your role in this?
 - Is this for a new product or for enhancing an existing product?
 - Is there a specific goal, like increasing a particular metric?
 - Are there any hard restrictions, like regulations, hardware, software, or human resources?
 
-Regarding the company and strategy
+## Regarding the company and strategy
 
 - How big is the company? What are its current offerings?
 - How is the audience?
 - What is the monetization strategy (if there is one)?
 - What is the mission of the company (if there is one)?
 
-PRODUCT LIFECYCLE
+## PRODUCT LIFECYCLE
 
 What user personas would use [type of tech (sample: voice recognition) ] in an app and what use cases would they use it? Create in prioritized list of user personas based on reach. I am going to create an app and will only launch it in [Country/State] in the beginning so make sure to that into account as well.
-
-**Breakdown of the Formula**
+ 
+#### **Breakdown of the Formula**
 
 - Type of Tech: Specify the technology you are focusing on (e.g., voice recognition).
 - User Personas: Ask for specific user personas that would benefit from this technology.
@@ -52,18 +50,18 @@ What user personas would use [type of tech (sample: voice recognition) ] in an a
 
 **Deeper** - as a follow up to my question about voice recognition technology and user personas, let's dig deeper onto the first persona, commuters and drivers. What is their main pain point at the moment that voice recognition technology could solve?
 
-VALIDATING IDEA:
+## VALIDATING IDEA:
 
 It's really important to gather feedback from real people. We also analyze market trends and user behaviors before spending a lot of money or effort on research.
 
-PROMPTS:
+# PROMPTS:
 
 |Market Analysis|
 |--------------------------|
 | What are the current market trends related to [PRODUCT]?|
 | Have there been similar products to[PRODUCT] launched in the past, if so, how did they perform?|
 | What is the projected market size for [PRODUCT] market??|
-
+ß
 |COMPETITOR INSIGHTS|
 |--------------------------|
 | Who are the main competitors for [PRODUCT] ?|
