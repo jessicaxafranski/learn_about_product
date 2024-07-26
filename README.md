@@ -15,6 +15,7 @@ Internacional podcast:
 # Product Strategy
 
 * [Building a Product Roadmap](https://github.com/jessicaxafranski/learn_about_product/blob/main/build_pb.md)
+* Generative AI for Product Mangers
 * Product Backlog Building ;
    * Prioritizing a PB;
 * How to create User stories; 
@@ -27,13 +28,8 @@ Internacional podcast:
 
 * [Why data-driven is important for your product?](https://github.com/jessicaxafranski/learn_about_product/blob/main/data_driven.md) 
 * [Performance indicators](https://github.com/jessicaxafranski/learn_about_product/blob/main/performance_indicators.md);
-    
-   * [How to create KR'S](https://github.com/jessicaxafranski/learn_about_product/blob/main/create_KR.md)⛏⛏
-   * Monitoring KPI's
-
-# Data Lake and Metadata
-⛏⛏
-
+* [How to create KR'S](https://github.com/jessicaxafranski/learn_about_product/blob/main/create_KR.md)⛏⛏
+   
 
 # API's
 
