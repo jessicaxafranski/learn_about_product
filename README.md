@@ -15,7 +15,7 @@ Internacional podcast:
 # Product Strategy
 
 * [Building a Product Roadmap](https://github.com/jessicaxafranski/learn_about_product/blob/main/build_pb.md)
-* Generative AI for Product Mangers
+* [Generative AI for Product Managers](https://github.com/jessicaxafranski/learn_about_product/blob/main/generativeAI_PM.md)
 * Product Backlog Building ;
    * Prioritizing a PB;
 * How to create User stories; 
