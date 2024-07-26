@@ -18,6 +18,6 @@ I discovered a LinkedIn course that answered all my questions.
 
 
 
-
+NOT FINISH
 
 
