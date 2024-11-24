@@ -111,3 +111,12 @@ Interviewers want to see that you aren't stuck in a mindset of just doing the sa
 | **Decline in Traffic**     | - Poor SEO <br> - Weak content strategy <br> - Ineffective ad campaigns                                 | - Are keywords and SEO strategies up-to-date? <br> - Is the content engaging for the target audience?              | - How can we improve organic traffic? <br> - Should we invest more in paid advertising or revise our ad campaigns?  |
 | **Decline in New Visitors**| - Ineffective outreach <br> - Poor social media presence <br> - Decline in referrals or external links  | - Are referral programs effective? <br> - Is the brand visibility declining in key channels?                       | - How can we boost visibility in social media and search engines? <br> - What partnerships or collaborations can drive new visitors? |
 
+
+### **Checklist for Preparation**
+
+- [ ] **Review Problem-Solving Frameworks:** Study frameworks like SCQA, MECE, SWOT, etc., and practice structuring problems.
+- [ ] **Practice Data Analysis:** Focus on interpreting trends, calculating metrics, and using data for decision-making.
+- [ ] **Go-To-Market Knowledge:** Understand common challenges and strategies in product launches.
+- [ ] **Mock Case Studies:** Practice solving theoretical business problems to prepare for case study questions.
+- [ ] **Refine Communication Skills:** Practice delivering clear, concise, and structured responses.
+
