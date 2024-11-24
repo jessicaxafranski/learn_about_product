@@ -19,7 +19,7 @@ When participating in a case interview, it is essential to think quickly and cre
 
 Don't worry about memorizing these frameworks. Just read them over to get a sense for the types of sctrucuture that can be used to answer the question
 
-**Frameworks**
+## Frameworks
 
 | **Framework**            | **When to Use It**                                                                                                                                                                       |
 |---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -30,6 +30,35 @@ Don't worry about memorizing these frameworks. Just read them over to get a sens
 | **Five Cs** (Company, Customers, Competitors, Collaborators, Context) | Use to analyze a business environment, especially when preparing for strategic decisions or market entry strategies.                               |
 | **Porter's 5 Forces** (Threat of New Entrants, Bargaining Power of Buyers, Bargaining Power of Suppliers, Threat of Substitutes, Industry Rivalry) | Apply for industry analysis to understand competition and profitability.                                |
 
+# **Interview Questions**
+
+## Strategy Questions 
+Includes asking about the company strategies and it's import to think about in two levels.
+
+| **Type**         | **Sample Questions**                                                                                      |
+|-------------------|----------------------------------------------------------------------------------------------------------|
+| Micro            | - What is the business model for the product?  <br> - What steps is the company pursuing to succeed on that model? <br> - Will customers want it?         |
+| Macro            | - How does this product fit into the greater vision of the company? <br> Will it open up new opportunities? <br> - Does it secure an existing market? |
+
+In discussing the macro and macro, frameworks such as SWOT and Five Forces might be particularly useful.
+
+| **Type**         | **Sample Questions**                                                                                      | **Relevant Frameworks**                   |
+|-------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| Micro            | - How is the company leveraging its strengths or minimizing its weaknesses?                              | - SWOT Analysis                           |
+| Macro            | - What are the company's mission? <br> - What are the company's goals? <br> - What are the company's strengths? <br> - What are the company's weaknesses? | - SWOT Analysis <br> - Porter's Five Forces |
+
+### **Explanation:**
+
+- **Micro Questions** focus on tactical, actionable strategies and are often tied to short-term problem-solving. Here, **SWOT Analysis** can help assess how specific strengths and weaknesses apply.
+
+- **Macro Questions** involve broader strategic considerations, like market positioning, competition, and overall goals. Both **SWOT Analysis** and **Porter’s Five Forces** are highly relevant for answering these.
+
+
+## Marketing Questions
+## Launching Questions
+## Brainstorming Questions
+## Pricing & Profitability Questions
+## Problem Solving Questions 
 
 
 
