@@ -4,6 +4,8 @@ ChatGPT can 5X your interview chances.
 
 Copy and paste these ChatGPT prompts to land your dream job:
 
+# Recruiter 
+
 1. Company Research
 
 "I have an interview with [company] for the position of [job position]. Please summarize the company's mission, core products or services, and recent news or achievements by analyzing their website [website link] and any recent press releases."
@@ -15,6 +17,8 @@ Copy and paste these ChatGPT prompts to land your dream job:
 3. Resume Optimization
 
 "Review my current resume attached and suggest improvements tailored for applying to a [job position] at [company]. Highlight any gaps in my experience and recommend ways to address these through online courses or projects."
+
+# Tech interview 
 
 4. Interview Preparation
 
