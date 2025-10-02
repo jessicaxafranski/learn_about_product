@@ -1,0 +1,48 @@
+'' I'M TRYING TO FIGURE OUT WHICH OF OUR MARKETING CHANNELS LEAD TO THE LARGEST NUMBER OF SANDWICHES PURCHASED AND ORDERS ABANDONED ON THE IOS AND ANDROID APPS. THE TRICKY PART IS THAT I NEED TO LOOK AT FIRST-TIME PURCHASES AND REPEAT PURCHASES"
+
+- ACQUISITION AND RETENTION METRICS
+- PRODUCT METRICS
+- GROWTH AND MARKETING METRICS
+
+  WHAT SHOULD OUR RETENTION STRATEGY BE? WE KNOW THERE'S MANY OPTIONS FOR FOOD DELIVERY. HOW DO WE MAKE SURE RANDOSANDO IS EVERYONE'S FIRST CHOICE?
+
+  WE NEED A MEASUREMENT FRAMEWORK THAT LOOKS AT EACH STAGE OF OUR CUSTOMERS JOURNEY
+
+  WHEN OUR CUSTOMERS on-board and set UP THEIR DIETARY PREFERENCES, WE SHOULD FIGURE OUT HOW THAT affects their purchasing JOURNEYS. MAYBE WE'RE NOT PROPERLY ACCOMODATING SOME TYPES OF DIETS. I SAW THAT WE INTROCUDED THE "VIEW SANDWICH INGREDIENTS"MODAL VIEW IN V1.2,
+  ANDIT WOULD BE GOOD TO KNOW IF USERS WHO ADOPTED THAT FEATURE STAY WITH US NO LONGER.
+
+  SET METRICS THAT CAPTURE RENTENTION ACROSS THE ENTIRE CUSTOMER JOURNEY
+** ABOUT ACQUISITION** 
+
+  Acquisition metrics and funnel analyses are a critical component to any product’s overall health. You cannot grow a product’s usage or a business's revenue without some meaningful customer acquisition strategy. And often, the first step towards positive change is taking good measurements and analyzing them correctly. 
+
+There are many roles in product, growth, operations, and management where the job's primary function is to find ways to optimize and fix leaky or broken parts of a funnel. You can build an entire career around funnel analysis and optimization—and we’ve really only scratched the surface of the visibility Mixpanel can provide into different parts of any product funnel.
+
+In the next module, we’ll look at how to analyze the customers we’ve already acquired. Because it’s not enough on its own to acquire customers—we have to retain them.
+  
+
+** ABOUT RETENTION **
+
+  Before we look at concrete metrics, let’s take a moment to discuss what “customer retention” really means, and why it’s traditionally a tricky metric to measure.
+
+Customer acquisition will almost always revolve around some sort of “sign up” or “create account” behavior. Signing up new customers is the common denominator for most acquisition metrics, and because of this, acquisition metrics are generally easier to measure.
+
+There are many battle-tested strategies on how to conceptualize an acquisition funnel; however, no two products will have the same retention strategy—and this makes it more difficult to measure, since every product must define its own strategy to keep its customers. Of course, the goal of retention is the same for all businesses—don’t lose customers—but how each product achieves this goal will differ. RandoSando’s retention strategy might involve a loyalty rewards program; whereas other businesses, like a video streaming platform, might dedicate their customer retention efforts to an in-app notification hub.
+
+As difficult as it is to build a compelling retention strategy, it is also difficult to measure that strategy’s effectiveness. At a high level, companies with strong customer retention tend towards profitability in the long-run, but that’s a lagging indicator. Profitability and growth prove that the business model is viable, but they don’t tell you what worked really well. They just tell you that something worked.
+
+If we can’t use simple metrics like revenue or user growth to measure retention, then how can we do it?
+
+As with most areas of research, it’s best to start with a simple question:
+What is a retained user?
+
+What does it mean to “be retained” on RandoSando?
+
+Let’s look at a user in a Mixpanel, and make some observations.
+
+
+
+
+
+  
+  Conclusion
