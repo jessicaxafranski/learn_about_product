@@ -135,3 +135,65 @@ Interviewers want to see that you aren't stuck in a mindset of just doing the sa
 | **8. Test the Strategy**               | Conduct trials or pilot launches to assess the effectiveness of your GTM plan.                        | - Are there any gaps in the strategy? <br> - What feedback do early users provide?    |
 | **9. Launch the Product**              | Execute the GTM strategy and release the product to your target audience.                             | - Is the launch aligned with your plan? <br> - Are all teams (sales, support) prepared? |
 | **10. Evaluate and Optimize**          | Analyze performance data to refine the GTM strategy continuously.                                    | - What worked well? <br> - What needs adjustment or improvement?                     |
+
+
+
+## Product Sense
+
+Motivation: WHY SHOULD WE BUILD THIS?
+User Segmentation: WHO SHOULD WE BUILD THIS FOR
+Identifying our Painpoints: FOR OUR TARGET USERS, WHAT ARE THE THINGS THAT THEY'RE STRUGGLING WITH THAT WE CAN HELP SOLVE
+Solutions: CLEVER SOLUTIONS
+
+## Mistakes
+
+QUESTIONS THAT I CAN DO:
+
+- I know that x company already building a similar product like the one you're asking me to build should I consider that?
+- Should we consider building this product pre-covered or during post-covered?
+- SHARING THE STRUCTURE OR OVERSCOPING
+- IS IT ALIGN TO OUR MISSION?
+- Are there strengths that we have to win this space?
+- how is it going to help us grow?
+ANSWER --
+
+BE THOUGHTFUL IN THIS SECTION:
+
+   - IS IT ALIGN THE MISSION OF THE COMPANY?
+   - WHAT ARE THE STRENGTHS THAT WE AS A COMPANY HAVE TO WIN IN THIS SPACE?
+   - WHAT IS THE MARKETING OPPORTUNITY AND SIZE THAT GETS US EXCITED ABOUT INVESTING IN THIS SPACE?
+   - DO WE HAVE ANY COMPETITIVE ADVANTAGES THAT ARE GOING TO HELP US WIN OVER ANY OTHER COMPETITOR?
+
+USER SEGMENT
+
+- A MULTI-SEDED ECOSYSTEM WHERE WE HAVE
+- WHY I AM CHOOSING THAT SEGMENTATION
+-  What's the size of this population
+-  What's the frequency of how they use the product
+-  What is their willingness to spend if we're going yo develop a product and we want to monetize off it we'd rather choose a group has a higher propensity to spend so we can actually make revenue
+
+PAIN POINTS:
+
+- WHEN WAS THE LAST TIME I HAD TO DEAL WITH THIS SITUATION
+- STRONG CRITERIA I WANT TO OPTIMIZE ON WHICH OF THESE PAIN POINTS AFFECT THE LARGEST PART OF THE POPULATION AND WHICH PF THESE PAIN POINTS DON'T HAVE ANY EXISTING SOLUTIONS
+
+SOLUTIONS: SHOULD BE UNIQUE AND INNOVATIVE
+
+MY SOLUTION IS GOING TO BE
+
+- not given a solution that already exists
+- you give a solution that already exists - out of there first acknowled that there's an existing solutions and what would you build on top to make it even better so
+
+There alreasy existed a website out there where you can search a director of doctors, filter and read reviews WHAT'S MISSING THAT REALLY HELPS  PEOPLE DECIDE DOCTORS is what issues the doctors have dealt with before. What issues the doctors have dealt with before.
+
+I'D BUILD SOMETHING THAT KIND CAPTURES THE DOCTOR'S EXPERIENCE WITH DEALING WITH SPECIFIC ISSUE SAY TYPE 2 DIABET'S AND ADD THAT TO A LIST TO ALLOW PEOPLE TO EASILY FIND DOCTORS THAT SPECIALIZE IN THE ISSUES THAT THEY'RE DEALING WITH
+
+--------------------------------------------------------------------
+  
+  SHOULD NOT
+- avoid questions that again are not going to impact your answer if you get the answer
+- ASKING TEM ABOUT OR THE PRODUCT THE'RE ASKING THEM TO BUILD SHOULD BE BUILD FOR THE COMPANY THEY'RE INTERVIEWING FOR
+- NOT ASSUME THAT YOU'RE A COMPANY
+
+
+
