@@ -153,6 +153,7 @@ QUESTIONS THAT I CAN DO:
 - Should we consider building this product pre-covered or during post-covered?
 - SHARING THE STRUCTURE OR OVERSCOPING
 - IS IT ALIGN TO OUR MISSION?
+- why does developing a parking solution matter?
 - Are there strengths that we have to win this space?
 - how is it going to help us grow?
 ANSWER --
