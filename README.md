@@ -15,6 +15,7 @@
 ## AI
 
 * [Generative AI for Product Managers](https://github.com/jessicaxafranski/learn_about_product/blob/main/generativeAI_PM.md)
+* [AI in Product Management (End-to-End)](https://github.com/jessicaxafranski/learn_about_product/blob/main/AI_tools.md)
 
 ## Other contents 
 
