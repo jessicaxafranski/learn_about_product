@@ -14,3 +14,18 @@
 | 🚀 Launch | Go to market | Generate release notes, emails, campaigns | [ChatGPT](https://chat.openai.com), [HubSpot](https://hubspot.com) | Personalized messaging by segment | ChatGPT (free), HubSpot (limited free) |
 | 📈 Analytics | Measure performance | Analyze funnels, detect churn, generate insights | [Mixpanel](https://mixpanel.com), [Amplitude](https://amplitude.com) | Real-time automated insights | Good free tier, advanced paid |
 | 🔁 Growth & Iteration | Improve product | A/B testing ideas, optimize funnel, find opportunities | [Optimizely](https://optimizely.com), [VWO](https://vwo.com) | Continuous loop: data → insight → action | Mostly paid |
+
+DISCOVER PHASE
+Synthesize insights across multiple data sources to identify patterns, generate recommendations, and define the highest-impact user problems to prioritize.
+
+VALIDATE PHASE
+Accelerate data analysis and experimentation by enabling rapid prototype testing and simultaneous validation of multiple hypotheses.
+
+BUILD PHASE
+Integrate continuous product testing into the roadmap earlier, while streamlining and accelerating documentation workflows.
+
+LAUNCH PHASE
+Execute controlled rollouts of new functionality based on real-time product usage and feedback, enabling scalable product-led growth.
+
+EVALUATE & ITERATE (AI-POWERED)
+Automatically assess feature performance, identify what is and isn’t working, and generate actionable recommendations and next steps.
