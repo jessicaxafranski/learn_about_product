@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn About Product</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #fff;
+        }
+
+        body {
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: #f8f9fa;
+            color: #374151;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-box {
+            margin-bottom: 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background-color: #ffffff;
+            color: #374151;
+            font-size: 13px;
+        }
+
+        .search-box input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.1);
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            letter-spacing: 0.06em;
+            padding-left: 10px;
+        }
+
+        .nav-item {
+            padding: 7px 10px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 13.5px;
+            color: #4b5563;
+            transition: all 0.15s;
+        }
+
+        .nav-item:hover {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .nav-item.active {
+            background-color: #ede9fe;
+            color: #5b21b6;
+            font-weight: 600;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: #374151;
+            padding: 14px 32px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header h1 {
+            font-size: 13px;
+            font-weight: 400;
+            color: #6b7280;
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px 48px;
+            background: #ffffff;
+        }
+
+        /* Landing page */
+        .landing-page {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 4px 16px rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .category-card-emoji {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .category-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 6px;
+        }
+
+        .category-card p {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.55;
+        }
+
+        /* Markdown content styling */
+        .markdown-content h1 {
+            font-size: 28px;
+            color: #111827;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+            color: #111827;
+            margin: 32px 0 12px 0;
+            font-weight: 700;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .markdown-content h3 {
+            font-size: 16px;
+            color: #374151;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .markdown-content p {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .markdown-content ul, .markdown-content ol {
+            margin-left: 24px;
+            margin-bottom: 14px;
+        }
+
+        .markdown-content li {
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 6px;
+        }
+
+        .markdown-content strong {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .markdown-content em {
+            color: #6b7280;
+        }
+
+        .markdown-content blockquote {
+            border-left: 3px solid #7c3aed;
+            margin: 20px 0;
+            color: #4b5563;
+            font-style: italic;
+            background-color: #faf5ff;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .markdown-content th {
+            background-color: #f5f3ff;
+            color: #374151;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .markdown-content td {
+            border-bottom: 1px solid #f3f4f6;
+            padding: 10px 14px;
+            color: #374151;
+        }
+
+        .markdown-content tr:last-child td {
+            border-bottom: none;
+        }
+
+        .markdown-content tr:hover td {
+            background-color: #faf5ff;
+        }
+
+        .markdown-content code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+            color: #be185d;
+            font-size: 13px;
+        }
+
+        .markdown-content pre {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 16px 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+        }
+
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+            color: #f9fafb;
+        }
+
+        .markdown-content a {
+            color: #7c3aed;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd6fe;
+        }
+
+        .markdown-content a:hover {
+            color: #5b21b6;
+            border-bottom-color: #7c3aed;
+        }
+
+        .markdown-content hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 28px 0;
+        }
+
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: #374151;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 0;
+                padding: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+
+            .sidebar.open {
+                max-height: 500px;
+                padding: 20px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+
+            .sidebar-title {
+                font-size: 18px;
+            }
+        }
+
+        /* Hidden search results display */
+        .search-results {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            width: 240px;
+            margin-top: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-results.show {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2 class="sidebar-title">Learning Hub</h2>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-item active" onclick="showHome()" data-page="home">🏠 Home</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Product Strategy</div>
+            <div class="nav-item" onclick="showPage('critical-thinking')" data-page="critical-thinking">Critical Thinking</div>
+            <div class="nav-item" onclick="showPage('product-roadmap')" data-page="product-roadmap">Building a Product Roadmap</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Data &amp; Metrics</div>
+            <div class="nav-item" onclick="showPage('data-driven-decisions')" data-page="data-driven-decisions">Why Data-Driven?</div>
+            <div class="nav-item" onclick="showPage('key-results')" data-page="key-results">How to Create KRs</div>
+            <div class="nav-item" onclick="showPage('performance-indicators')" data-page="performance-indicators">Performance Indicators</div>
+            <div class="nav-item" onclick="showPage('ab-testing')" data-page="ab-testing">A/B Testing</div>
+            <div class="nav-item" onclick="showPage('product-kpis-case-study')" data-page="product-kpis-case-study">Case Study: Acquisition &amp; Retention</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">AI</div>
+            <div class="nav-item" onclick="showPage('generative-ai-for-pms')" data-page="generative-ai-for-pms">Generative AI for PMs</div>
+            <div class="nav-item" onclick="showPage('ai-tools-end-to-end')" data-page="ai-tools-end-to-end">AI Tools End-to-End</div>
+            <div class="nav-item" onclick="showPage('ai-biases-critical-thinking')" data-page="ai-biases-critical-thinking">AI Biases &amp; Critical Thinking</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Technical</div>
+            <div class="nav-item" onclick="showPage('what-is-an-api')" data-page="what-is-an-api">What Is an API?</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Interviews</div>
+            <div class="nav-item" onclick="showPage('hiring-manager-prompts')" data-page="hiring-manager-prompts">Hiring Manager Prompts</div>
+            <div class="nav-item" onclick="showPage('case-interview-guide')" data-page="case-interview-guide">Case Interview Guide</div>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Resources</div>
+            <div class="nav-item" onclick="showPage('product-podcasts')" data-page="product-podcasts">Product Podcasts</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1 id="pageTitle">Learn About Product</h1>
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            <div id="homeContent" class="landing-page">
+                <div class="category-card" onclick="showPage('critical-thinking')">
+                    <div class="category-card-emoji">🗺️</div>
+                    <h3>Product Strategy</h3>
+                    <p>Learn critical thinking frameworks and how to build effective product roadmaps aligned with business goals.</p>
+                </div>
+
+                <div class="category-card" onclick="showPage('data-driven-decisions')">
+                    <div class="category-card-emoji">📊</div>
+                    <h3>Data &amp; Metrics</h3>
+                    <p>Master data-driven decision making, KRs, A/B testing, and measurement frameworks for product success.</p>
+                </div>
+
+                <div class="category-card" onclick="showPage('generative-ai-for-pms')">
+                    <div class="category-card-emoji">🤖</div>
+                    <h3>AI for Product</h3>
+                    <p>Understand how generative AI tools enhance PM work, their biases, and when to apply them in your workflow.</p>
+                </div>
+
+                <div class="category-card" onclick="showPage('what-is-an-api')">
+                    <div class="category-card-emoji">🔧</div>
+                    <h3>Technical Fundamentals</h3>
+                    <p>Get a non-technical understanding of APIs and key technical concepts for product decision-making.</p>
+                </div>
+
+                <div class="category-card" onclick="showPage('hiring-manager-prompts')">
+                    <div class="category-card-emoji">💼</div>
+                    <h3>Interviews &amp; Career</h3>
+                    <p>Prepare for PM interviews with case guides, behavioral questions, and AI-powered interview strategies.</p>
+                </div>
+
+                <div class="category-card" onclick="showPage('product-podcasts')">
+                    <div class="category-card-emoji">🎙️</div>
+                    <h3>Learning Resources</h3>
+                    <p>Discover curated podcasts and resources for continuous learning in product management.</p>
+                </div>
+            </div>
+
+            <div id="contentMarkdown" class="markdown-content" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        var allDocuments = {
+            'critical-thinking': "# Critical Thinking\n\nCritical thinking is the practice of questioning and evaluating information for reliability, relevance, and validity before acting on it. For PMs, it's not a soft skill — it's how you avoid building the wrong thing with confidence.\n\nThe core principle: **evidence over authority**. If someone senior says something is true, that's not a reason to believe it. Challenge the claim with the same rigor you'd apply to anyone else.\n\n---\n\n## Question Types\n\nGood critical thinking starts with asking the right kind of question. These fall into three categories:\n\n**Clarification questions** — check that you've understood correctly before going further:\n- Is that what you meant?\n- Could you give me a concrete example?\n\n**Evidence and reasoning questions** — probe why someone believes what they believe:\n- What led you to that conclusion?\n- What data supports this?\n- What would change your mind?\n\n**Implication questions** — explore the downstream consequences:\n- If that's true, what would follow?\n- What are we trading off if we go in that direction?\n- What happens if we're wrong about this?\n\n---\n\n## The 7 Elements of Reasoning\n\nThis framework (adapted from Paul & Elder's critical thinking model) helps you examine any claim or decision systematically.\n\n| Element | What to examine |\n|---------|----------------|\n| **Purpose** | Why are we doing this? Is the goal clear and shared? |\n| **Questions** | Are we asking the right questions, or just the easy ones? |\n| **Assumptions** | What are we taking for granted? How long can we safely assume this holds? |\n| **Perspective** | Whose point of view is missing from this conversation? |\n| **Information** | Is the data we're using relevant, current, and complete? |\n| **Concepts** | Do we all mean the same thing when we use this term? |\n| **Conclusions** | Given everything above, what's the most defensible interpretation? |\n\nRun any major product decision through these seven lenses before committing.\n\n---\n\n## Reflective Skepticism\n\nBefore accepting a claim — from a stakeholder, a metric, a user interview, or an AI tool — run it through this checklist:\n\n1. Is this a fact, or an opinion presented as one?\n2. How relevant is this to the actual decision we're making?\n3. Is the source credible, and do they have an incentive to mislead?\n4. Is the claim ambiguous — could it mean something different to different people?\n5. What assumptions are baked into this argument?\n6. Is there a logical fallacy here (correlation presented as causation, survivorship bias, etc.)?\n7. Are there inconsistencies between this claim and other things we know?\n8. How strong is the overall argument, and what would weaken it?\n\nThe goal isn't to be contrarian. It's to arrive at better decisions by being honest about what you actually know versus what you're assuming.\n\n---\n\n## Applying This as a PM\n\nCritical thinking is most valuable in three situations:\n\n**During discovery** — when you're deciding which problems to investigate, skepticism prevents you from anchoring on the first user complaint you hear.\n\n**During prioritization** — when stakeholders push for features, asking for evidence of impact protects the roadmap from HiPPO-driven decisions (Highest Paid Person's Opinion).\n\n**During retrospectives** — when a launch goes well or badly, rigorous post-mortems separate luck from skill and help you learn the right lessons.\n\nThe most important habit: **write your assumptions down before you start**. When the outcome is known, it's easy to rationalize that you \"knew all along.\" Documented assumptions hold you honest.",
+            'product-roadmap': "# Building a Product Roadmap\n\nA product roadmap is a strategic planning document — not a commitment schedule. Its job is to communicate the direction of the product, align stakeholders around a shared plan, and make trade-offs visible.\n\n*Based on the LinkedIn course: Product Management — Build a Product Roadmap.*\n\n---\n\n## Who Needs to Be Involved\n\nRoadmaps don't get built in isolation. The people who need to be involved — and whose input shapes the plan — include:\n\n- Customers and customer-facing teams (support, sales, success)\n- Investors, board members, and sponsors\n- Engineering leads, architects, and designers\n- Human resources (for capacity planning)\n\nMissing any of these perspectives usually produces a roadmap that's either unrealistic or misaligned with business goals.\n\n---\n\n## What a Milestone Is (and Isn't)\n\nA milestone marks a meaningful moment in the product's development — typically a major release, a capability going live, or a date the team needs to plan around.\n\nMilestones are **not** backlog tasks or sprint goals. They represent changes significant enough to require substantial research, design, and engineering work. If a milestone can be completed in a week, it's probably a task.\n\n---\n\n## How to Build Your First Milestone List\n\nStart from strategy, not from the backlog:\n\n1. Re-read your product strategy and company objectives.\n2. Research the market and your target customers — what problems are they facing that you haven't addressed yet?\n3. Identify the major product changes that would advance the strategy.\n4. For each change: record the strategic objective it supports and a brief summary of what \"done\" looks like.\n5. Sort them in rough priority order — don't worry about dates yet.\n\nThen get feedback. Share the list with key stakeholders and ask what they would change. Incorporate their input before moving to scheduling.\n\n---\n\n## Estimating Effort and Scheduling\n\nMost teams underestimate how much of their capacity is already spoken for. Before adding dates, audit where time actually goes:\n\n| Activity | Typical Allocation |\n|----------|-----------|\n| Bug fixing | ~25% |\n| Product maintenance | ~20% |\n| Engineering-driven work | ~20% |\n| **Available for new features** | **~35%** |\n\nYour roadmap milestones can only fill that last bucket. This is the number that should drive your date estimates, not optimistic assumptions.\n\n**Example:** A milestone requires 20 developer-weeks of effort. Your team has 5 developers, each contributing 35% of their time to new work. That's 5 × 0.35 = 1.75 effective developers per week. The milestone will take roughly 20 ÷ 1.75 ≈ 11 weeks, not 4.\n\nTrack front-end and back-end capacity separately — they rarely have the same constraints.\n\n---\n\n## Sequencing Milestones\n\nOnce you have effort estimates, sequence milestones into planning periods:\n\n| | Quarter 1 | Quarter 2 | Quarter 3 | Quarter 4 |\n|--|-----------|-----------|-----------|----------|\n| **Track A** | Milestone 1 | Milestone 3 | Milestone 6 | Milestone 8 |\n| **Track B** | Milestone 2 | Milestone 4 | Milestone 7 | |\n| | | Milestone 5 | | |\n\nFor each sequence decision, ask:\n- Does this milestone directly advance the product strategy?\n- Is it feasible given current engineering capacity?\n\nIf both answers are yes, it belongs on the roadmap. If either is no, it needs to be de-prioritized or descoped.\n\n---\n\n## Aligning Stakeholders\n\nA roadmap nobody agrees with is a roadmap nobody will execute against. Run stakeholder alignment meetings with this structure:\n\n1. State the goal — what problem is the roadmap solving?\n2. Quickly recap the product strategy so everyone shares the same context.\n3. Walk through team capacity — make the constraints visible.\n4. Present the roadmap as a draft, not a decree.\n5. Ask explicitly: \"What would you change, and why?\"\n6. Make modifications in real time where possible.\n7. Make trade-offs explicit — adding something means moving or removing something else.\n8. End with a shared commitment, not just acknowledgment.\n\n> \"The purpose of the product roadmap is to align product stakeholders around the development plan that your roadmap represents.\"\n\nAfter the meeting, schedule one-on-ones with teams that weren't in the room (legal, finance, operations). Roadmap surprises create more resistance than roadmap disagreements.\n\nAlways present the roadmap as a team artifact: **\"This is our roadmap\"** — not yours.\n\n---\n\n## Knowing When to Update\n\nThe roadmap should be a living document, reviewed on a regular cadence and updated when the situation meaningfully changes. Common triggers:\n\n- Customer needs have shifted in a way that changes priorities\n- A competitor moved that changes the opportunity landscape\n- Engineering capacity or timeline estimates were significantly off\n\nThe process for updating is the same as building it: check the strategy first, then reassess priorities, then re-align stakeholders. Don't update the roadmap reactively to every stakeholder request — that's how you end up with no roadmap at all.\n\n---\n\n## Three Rules to Keep the Roadmap Useful\n\n| Rule | Why it matters |\n|------|--------|\n| Spend time with customers regularly | Roadmaps that aren't grounded in real problems drift toward internal politics |\n| Share it broadly and often | Visibility prevents misalignment and surfaces objections early |\n| Keep it current | A roadmap that's six months out of date is worse than no roadmap |",
+            'data-driven-decisions': "# Why Data-Driven Decisions Matter\n\nMost product decisions feel like they're based on data. In practice, they're often based on the story someone tells *about* the data — which is a different thing. Building a genuine data-driven practice means being honest about that gap and closing it deliberately.\n\n---\n\n## What \"Data-Driven\" Actually Means\n\nBeing data-driven doesn't mean requiring a spreadsheet for every decision. It means that when you make a call, you can articulate:\n\n- What evidence supports it\n- What evidence would have changed it\n- What assumptions you're still relying on\n\nA decision made without being able to answer those three questions is an opinion, not a data-driven choice — even if there's a dashboard somewhere with numbers on it.\n\n---\n\n## Why It Matters for Product Teams\n\n**Better accuracy.** Intuition is shaped by recent experience, loud stakeholders, and cognitive bias. Data forces you to confront what's actually happening across your full user base, not just the cases you've seen.\n\n**Faster decisions.** Counterintuitively, a team with clear metrics and a shared definition of success moves faster — not slower. Debates end when there's agreed-upon evidence to consult.\n\n**Understanding customers at scale.** You can't talk to every user. Data is how you learn what the users you *didn't* talk to are doing, where they're dropping off, and what they value.\n\n**Accountability.** When you define the metric before launching a feature, you're committing to a falsifiable prediction. That's uncomfortable, but it's also the only way to actually learn whether something worked.\n\n**Informed prioritization.** Without data, every stakeholder's priority feels equally urgent. With it, you can show the relative impact of different bets and make trade-offs visible.\n\n---\n\n## Common Failure Modes\n\nKnowing the risks is as important as knowing the benefits:\n\n- **Metric fixation:** Optimizing for a metric until it stops representing what you actually care about. (Classic example: optimizing for clicks at the expense of satisfaction.)\n- **Confirmation bias:** Only pulling data that supports a decision you've already made.\n- **Vanity metrics:** Reporting numbers that look good but don't connect to outcomes — total signups, page views, app downloads.\n- **Analysis paralysis:** Waiting for perfect data before making any decision. Good enough data, decided on quickly, usually beats perfect data arrived at too late.\n\n---\n\n## A Practical Starting Point\n\nIf your team isn't data-driven yet, start with three steps:\n\n1. **Define success before you build.** Before any feature ships, write down: \"This feature will be considered successful if [metric] moves from [X] to [Y] within [Z] weeks.\"\n\n2. **Instrument the thing you care about.** You can't measure what you haven't tracked. Make sure the events, funnels, and cohorts you need exist before launch — not after.\n\n3. **Review data at a fixed cadence.** A weekly 30-minute metrics review, consistently attended, builds more data literacy in a team than any training course.\n\nData doesn't make decisions for you. It narrows down the space of defensible decisions and helps you make better bets.",
+            'key-results': "# How to Create Key Results (KRs)\n\nKey Results are the measurable outcomes that define what success looks like for a given Objective. In the OKR framework, the Objective answers *where you're going* and the KRs answer *how you'll know you've arrived*.\n\nA KR is not a task (\"launch the feature\"), a project (\"complete the redesign\"), or an activity (\"run user interviews\"). It's an outcome — something that changes in the world as a result of your work.\n\n---\n\n## What Makes a KR Good\n\nA well-written Key Result has these properties:\n\n**Measurable.** The result must be expressed as a number, a percentage, a threshold, or a clearly binary state. \"Improve user satisfaction\" is not a KR. \"Increase CSAT score from 3.8 to 4.2\" is.\n\n**Time-bound.** A KR without a deadline is a wish. Specify the quarter, sprint, or date by which the target should be reached.\n\n**Outcome-oriented.** Focus on the change in user behavior, business performance, or system state — not on the activities that produce it.\n\n**Ambitious but grounded.** KRs should require real effort and stretch the team. If you're confident you'll hit 100% of your KRs every quarter, they're too easy.\n\n**Independently verifiable.** Anyone on the team should be able to look at the data and agree on whether the KR was met. Ambiguity in the measurement method is a red flag.\n\n---\n\n## The 15 Characteristics of a Strong Indicator\n\nWhen designing the metric behind a KR, evaluate it against these criteria:\n\n1. **Relevance** — Does this indicator actually connect to the objective, or is it a proxy that might diverge?\n2. **Credibility** — Would stakeholders trust this number if they saw it? Is the data collection reliable?\n3. **Proportionate effort** — Is the cost of measuring this worth the value of the information?\n4. **Timeliness** — Can you get this data fast enough to act on it, or is it always lagging?\n5. **Actionability** — If the number moves in the wrong direction, do you know what to do about it?\n6. **Clarity** — Is the definition of the metric written down and unambiguous?\n7. **Comparability** — Can you compare this metric across time periods, segments, or product lines?\n8. **Granularity** — Is the metric broken down at the right level to surface useful insights?\n9. **Accessibility** — Is the data available to everyone who needs it, or gated behind a specific team?\n10. **Consistency** — Is it calculated the same way every time, by every person?\n11. **Sensitivity** — Does the metric move when something meaningful happens, or is it too coarse?\n12. **Resistance to gaming** — Can people improve the number without improving the underlying reality?\n13. **Alignment** — Does improving this metric align with improving the overall business or user outcome?\n14. **Sustainability** — Can you track this metric indefinitely, or will the cost of collection grow over time?\n15. **Visibility** — Is this metric surfaced where teams can see it regularly, not buried in a report?\n\nNo single KR will perfectly satisfy all 15. This list is a tool for identifying weaknesses before you commit, not a checklist that must be fully satisfied.\n\n---\n\n## Common KR Mistakes\n\n**Writing outputs instead of outcomes.** \"Ship the onboarding redesign\" is a task. \"Increase onboarding completion rate from 42% to 65%\" is a KR.\n\n**Setting too many KRs.** Three to five per Objective is the practical ceiling. More than that and the team can't hold them all in focus — and trade-offs between KRs become invisible.\n\n**Ignoring leading indicators.** Lagging indicators (revenue, retention) tell you what happened. Leading indicators (activation rate, feature adoption) tell you what's likely to happen. Mix both.\n\n**Forgetting the baseline.** If you don't know where you're starting from, you can't set a meaningful target. Measure first, then set the KR.\n\n---\n\n## Template\n\nUse this structure when drafting a KR:\n\n> **We will know we've succeeded when** [metric] **moves from** [current baseline] **to** [target] **by** [date].\n\nExample:\n> We will know we've succeeded when the 30-day retention rate for new users moves from 28% to 40% by end of Q3.",
+            'performance-indicators': "# Performance Indicators\n\nA performance indicator is a quantitative or qualitative measure that tells you whether a process or product is achieving its intended outcome. Without indicators, you're navigating without instruments — you might feel like things are going well right up until they aren't.\n\n---\n\n## The Core Question\n\nBefore choosing an indicator, answer this: **what decision will this metric inform?**\n\nIf you can't name a concrete decision that the metric would change, it's probably a vanity metric — something that feels useful to measure but doesn't actually drive action.\n\n---\n\n## Types of Indicators\n\n### Trend indicators\n\nThese are forward-looking. They measure early signals that predict future outcomes. Companies use them to take **preventive action** before a problem fully materializes.\n\nExamples: Support ticket volume (predicts churn), feature adoption rate in the first week (predicts long-term retention), sales pipeline coverage (predicts revenue shortfall).\n\n### Performance indicators\n\nThese are backward-looking. They confirm whether a goal was met after the fact. They tell you the **efficacy of past decisions**.\n\nExamples: Monthly revenue, quarterly retention, NPS score.\n\nMost dashboards overindex on performance indicators because they're easier to define. The most actionable teams also track trend indicators because they give you time to respond.\n\n---\n\n## Efficiency vs. Effectiveness\n\nThese two concepts are frequently confused and frequently misused:\n\n| | Efficiency | Effectiveness |\n|--|------------|---------------|\n| **Definition** | Doing things the right way; optimizing resource use | Doing the right things; achieving the intended goal |\n| **Question it answers** | Are we minimizing waste? | Are we hitting our targets? |\n| **Example** | Reducing cost-per-ticket in customer support | Resolving customer issues on the first contact |\n| **Measured by** | Productivity metrics, cost ratios | Goal attainment, outcome metrics |\n\nA team can be highly efficient (low cost, fast execution) while being ineffective (building the wrong thing). The goal is to be both — and performance indicators should be designed to catch failures on either dimension.\n\n---\n\n## Defining Your Measurement Framework\n\nEvery indicator needs three supporting elements to be useful:\n\n**Objective** — the high-level direction you're moving in (\"improve customer experience\").\n\n**Goal** — the specific, quantifiable target that defines success (\"increase first-contact resolution rate to 85%\").\n\n**Deadline** — the date by which the goal should be reached. Without this, goals become aspirations.\n\n| Objective | Goal | Deadline |\n|-----------|------|----------|\n| Increase revenue | Grow MRR from €80K to €100K | End of Q2 |\n| Reduce churn | Decrease monthly churn from 5% to 3% | End of Q3 |\n| Improve onboarding | Increase activation rate from 40% to 60% | End of Q1 |\n\nThese three elements must stay connected. A goal without an objective loses strategic context. A goal without a deadline is unmeasurable. An objective without a goal is a direction, not a commitment.\n\n---\n\n## Data vs. Information\n\nThis distinction matters more than it seems:\n\n**Data** is raw — numbers, events, logs. It exists in databases. By itself it doesn't mean anything.\n\n**Information** is data that has been processed and interpreted to support a decision. Information is what your indicator actually surfaces.\n\nThe job of a performance indicator is to transform data into information. A metric that nobody reads or acts on is just data.\n\n---\n\n## Quantitative vs. Qualitative Indicators\n\n**Quantitative indicators** produce numerical results: percentages, counts, ratios, averages. They're easy to track and compare over time.\n\n**Qualitative indicators** produce non-numerical results: sentiment, satisfaction categories, pass/fail judgments. They're harder to aggregate but often capture nuance that numbers miss.\n\nMost mature measurement systems use both. NPS, for example, is quantitative — but the open-text follow-up is qualitative, and often more informative.\n\n---\n\n## KPIs\n\nA **Key Performance Indicator** is simply a performance indicator that the organization has decided is *critical* — directly tied to the most important business outcomes. Not every metric is a KPI.\n\nThe test: if this KPI moved significantly in the wrong direction, would leadership change priorities? If yes, it's a KPI. If no, it's just a metric.\n\n---\n\n## Performance Scale\n\nWhen comparing results across different KPIs (which may have different units), normalize them to a performance score:\n\n| Outcome | Performance |\n|---------|----------|\n| All objectives achieved | 100% |\n| Objectives partially achieved | < 100% |\n| Objectives exceeded | > 100% |\n\nAiming for 70–80% on ambitious targets is often healthier than consistently hitting 100% — consistent 100% usually means targets were set too low.",
+            'ab-testing': "# A/B Testing\n\nA/B testing (split testing) is a method of comparing two versions of something to determine which performs better based on a defined metric. It's one of the most reliable ways to make product decisions because it uses real user behavior — not surveys, assumptions, or opinions.\n\n---\n\n## The Core Principle\n\nShow version A to one group of users and version B to another. Measure a specific outcome for each group. Determine whether the difference is statistically significant. Ship the winner.\n\nThe key constraint: **change only one variable at a time.** If you change the button color and the headline simultaneously, you won't know which change drove the result.\n\n---\n\n## Why Run A/B Tests\n\n**Evidence over intuition.** Everyone on a product team has opinions about what will work. A/B tests let reality decide.\n\n**Risk reduction.** You can validate a change with a small percentage of your traffic before rolling it out to everyone. A bad change affects fewer users.\n\n**Continuous improvement.** Even small wins compound. An 8% lift in conversion rate, repeated across several experiments over a year, adds up to significant revenue impact.\n\n**Informed resource allocation.** Tests tell you where to invest further — and where to stop investing.\n\n---\n\n## Key Concepts\n\n**Control:** The existing version (version A). This is your baseline.\n\n**Variant:** The version with the change you're testing (version B). There can be more than one variant, but each one doubles the complexity.\n\n**Hypothesis:** A falsifiable prediction written *before* the experiment runs. Format: \"Changing [X] will increase [metric] because [reason].\" Without a hypothesis, you're not running an experiment — you're just collecting data and looking for patterns after the fact.\n\n**Conversion rate:** The percentage of users who take the desired action. This is usually your primary success metric.\n\n**Sample size:** The number of users in each group. Larger samples produce more reliable results. Running a test with 50 users per group will give you noisy, untrustworthy data.\n\n**Statistical significance:** The confidence threshold at which you accept that the difference between variants is real and not due to random variation. The standard is 95% confidence (p < 0.05).\n\n---\n\n## Experiment Duration\n\n**Minimum recommended duration: 2 weeks.**\n\nRunning a test for less than two weeks risks:\n\n- Capturing day-of-week effects (behavior on Monday differs from behavior on Saturday)\n- Not reaching statistical significance even if the effect is real\n- Making decisions on early-adopter behavior that doesn't reflect your average user\n\nDon't stop a test early because it looks like the variant is winning. Wait until you have the sample size you planned for — stopping early dramatically inflates false positive rates.\n\n---\n\n## When A/B Testing Is Not the Right Tool\n\n- **Traffic is too low.** If you can't reach statistical significance within a reasonable timeframe, you'll be running experiments for months. Consider qualitative research instead.\n- **The change is too small to measure.** Some improvements are real but below the detection threshold of your traffic level.\n- **You need to move fast.** A/B tests take time. For urgent decisions or early-stage products, make a judgment call and measure the outcome retrospectively.\n- **The change is irreversible.** Tests work when you can roll back. If you can't, you need more confidence before shipping — not an experiment.\n\n---\n\n## Multivariate Testing\n\nMultivariate testing tests multiple variables simultaneously to understand how they interact. For example, testing both headline copy and image at the same time.\n\nThe trade-off: it requires significantly more traffic to reach significance across all combinations, and the analysis is more complex. For most teams, running sequential A/B tests is more practical than multivariate testing.\n\n---\n\n## Common Mistakes\n\n- Running a test without a hypothesis\n- Stopping early when you see a positive result (\"peeking\")\n- Ignoring statistical significance and declaring a winner based on gut feel\n- Testing with too small a sample\n- Forgetting to check for novelty effects (users behave differently because something is new, not because it's better)\n- Treating a failed test as a failure — a null result is information too",
+            'product-kpis-case-study': "# Case Study: Acquisition and Retention Metrics\n\nThis case study is based on a product analytics exercise for **RandoSando**, a food delivery app for sandwiches available on iOS and Android. The exercise covers how to define a measurement framework for acquisition and retention across the full customer journey.\n\n---\n\n## The Business Questions\n\nThe product team needs answers to three problems:\n\n1. Which marketing channels drive the most purchases and the most abandoned orders — broken down by first-time vs. repeat buyers, and by platform (iOS vs. Android)?\n2. What should the retention strategy be, given that there are many competing food delivery options?\n3. How does the onboarding experience (specifically dietary preferences) affect purchasing behavior over time?\n\nThese questions aren't independent. They form a measurement framework that needs to span the full customer lifecycle.\n\n---\n\n## Part 1: Acquisition Metrics\n\nAcquisition is about understanding how users arrive and what they do next. For RandoSando, this means building a funnel analysis segmented by:\n\n- **Channel** (paid social, organic search, referral, email, etc.)\n- **Platform** (iOS vs. Android)\n- **User type** (first-time buyer vs. repeat buyer)\n\n### Key acquisition metrics\n\n| Metric | What it measures |\n|--------|------------------|\n| Install-to-order rate | What percentage of app installs result in a first purchase |\n| Channel conversion rate | Which channels produce users who actually buy, not just download |\n| Cart abandonment rate by channel | Which channels drive high-intent users who still don't convert |\n| Cost per acquisition (CPA) | What it costs to get one paying customer from each channel |\n| Time-to-first-order | How long after install does the first purchase happen |\n\nThe split between first-time and repeat buyers matters because they behave differently and respond to different interventions. A channel that drives a lot of first purchases might be producing low-retention users. A channel that drives fewer but higher-LTV customers might be undervalued.\n\n---\n\n## Part 2: Retention Metrics\n\nRetention is harder to define than acquisition because there's no universal answer to \"what does retained mean?\" Every product has to define it for itself.\n\nFor RandoSando, the core question is: **what does it mean for a user to be retained?**\n\nA starting definition: a user who places at least one order per month. But this needs to be validated against actual user behavior. If the natural ordering frequency for your best users is once a week, a monthly threshold is too loose.\n\n### Retention metric categories\n\n**Engagement retention** — is the user actively using the app?\n- Weekly/monthly active users (WAU/MAU ratio)\n- Session frequency\n- Feature adoption rate (e.g., percentage of users using the \"view ingredients\" modal)\n\n**Transaction retention** — is the user continuing to buy?\n- Month-2, Month-3, Month-6 repeat purchase rates\n- Orders per user per month by cohort\n- Revenue retention (net revenue retained from a given cohort over time)\n\n**Churn indicators** — who is leaving, and when?\n- Days since last order (leading indicator of churn)\n- Churn rate by segment (dietary preference, platform, acquisition channel)\n- Reactivation rate (users who churned and came back)\n\n### The RandoSando retention question\n\nThe team knows there are many food delivery competitors. Retention strategy options include loyalty programs, push notifications, personalized recommendations, and subscription models. The measurement framework must evaluate which intervention works — and for whom.\n\n---\n\n## Part 3: The Dietary Preferences Dimension\n\nRandoSando collects dietary preferences during onboarding. The hypothesis is that users whose preferences are well-accommodated stay longer.\n\nThis requires a segmented cohort analysis:\n\n1. Group users by dietary preference set (vegan, gluten-free, no restrictions, etc.)\n2. Compare retention curves across groups\n3. Identify which groups show early drop-off (suggesting their needs aren't being met)\n\nAdditionally, version 1.2 introduced a \"view sandwich ingredients\" modal. The question is whether users who adopted this feature show higher retention than those who didn't.\n\n**Caution on causation:** Users who engage more deeply with any feature tend to be more retained regardless of the feature. Before concluding the modal drives retention, check whether the adoption correlates with other engagement signals, or whether the modal is a symptom of engagement rather than a cause of it.\n\n---\n\n## Proposed Measurement Framework\n\n| Stage | Key Metric | Segmentation |\n|-------|-----------|---------------|\n| Awareness | Installs by channel | iOS / Android |\n| Acquisition | Install-to-first-order rate | Channel, platform |\n| Activation | Completed onboarding + dietary preferences set | Diet type |\n| Engagement | Feature adoption rate (ingredients modal) | Dietary group |\n| Retention | 30/60/90-day repeat purchase rate | Cohort, channel, diet |\n| Revenue | Average order value, orders per month | Segment |\n| Churn | Days since last order, churn rate | Platform, diet, channel |\n\nThis framework connects each stage of the customer journey to a specific metric, and each metric to at least one actionable segmentation. The goal is not just to know that retention is falling — it's to know *for whom* and *at what point*, so you can intervene.",
+            'generative-ai-for-pms': "# Generative AI for Product Managers\n\n*Based on the LinkedIn course: Generative AI for Product Managers.*\n\nThe debate about whether AI will replace PMs misses the more useful question: how does a PM who uses AI well outperform one who doesn't? This document is about the second question.\n\n---\n\n## What AI Does Well vs. What PMs Do Well\n\n| Generative AI | Product Manager |\n|---------------|------------------|\n| Generates content at speed and scale | Decides *what* to generate and *why* |\n| Synthesizes large amounts of text | Applies judgment about what matters |\n| Finds patterns in structured prompts | Navigates ambiguity, politics, and trade-offs |\n| Executes well-defined tasks | Defines which tasks are worth doing |\n\nThe point isn't that AI can't replace PMs — it's that AI and a thoughtful PM working together can outperform either one alone. The PMs most at risk are those who do tasks that AI can do, without adding the layer of judgment that AI can't.\n\n---\n\n## Questions to Ask Before Integrating AI Into a Product\n\nBefore adding any AI capability to a product, answer these:\n\n**About the problem:**\n- What specific user problem does this solve?\n- Is there a simpler, non-AI solution that's more reliable?\n- What happens when the AI makes a mistake — how does the user recover?\n\n**About the product context:**\n- Is this for a new product or an enhancement to an existing one?\n- Is there a specific metric this should move?\n- Are there regulatory or compliance constraints that affect AI use?\n\n**About the company:**\n- What's the company's data position — do we have enough quality data to make the AI useful?\n- What's the monetization model, and how does AI fit into it?\n- Does this align with the company's mission?\n\n---\n\n## Using AI in the Product Lifecycle\n\n### Discovery and validation\n\nInstead of waiting weeks for research synthesis, use AI to:\n- Cluster themes from user interview transcripts\n- Identify contradictions across feedback sources\n- Draft survey questions for a specific persona or hypothesis\n\nPrompt pattern for persona research:\n> \"What user personas would use [technology] in a [type of app]? Create a prioritized list by reach. The app will launch first in [country/region].\"\n\nThen drill down:\n> \"For the first persona you identified, what is their primary pain point that [technology] could solve? What alternatives do they currently use?\"\n\n### Market validation\n\nUse these prompt patterns systematically before committing to a direction:\n\n| Question type | Prompt pattern |\n|--------------|----------------|\n| Market size | \"What is the projected market size for [product category] in [region] in [year]?\" |\n| Competitive landscape | \"Who are the main competitors for [product]? How do they differentiate?\" |\n| Historical precedents | \"Have similar products been launched before? What happened?\" |\n| Regulatory risk | \"Are there known regulations affecting [product type] in [market]?\" |\n| Cultural fit | \"What adaptations would [product] need to succeed in [country]?\" |\n\n### Prototyping and spec writing\n\n- \"Generate a bulleted list of all screens an MVP for [product] would need.\"\n- \"Write a user story for [persona] trying to [goal], including acceptance criteria.\"\n- \"What are the edge cases for [feature] that the engineering team should handle?\"\n\n### Launch and go-to-market\n\n| Task | AI useful? |\n|------|------------|\n| Writing the rollout plan | Yes |\n| Creating marketing copy drafts | Yes |\n| Predicting market trends | Yes (with caveats — always verify) |\n| Making the launch decision | No |\n| Replacing user research | No |\n\n---\n\n## Limitations to Stay Aware Of\n\nAI models have knowledge cutoffs, so trend and market data may be outdated. Verify anything time-sensitive with current sources.\n\nAI confidently produces plausible-sounding outputs that can be wrong. This is especially risky in competitive analysis and regulatory research. Treat AI output as a starting draft, not a final answer.\n\nSee [AI Biases and Critical Thinking](ai-biases-critical-thinking.md) for a structured approach to challenging AI-generated content.",
+            'ai-tools-end-to-end': "# AI Tools Across the Product Lifecycle\n\nA practical map of where AI fits into each stage of building a product — what the goal is, how to use AI to advance it, and which tools are worth knowing.\n\n---\n\n## Full Lifecycle Overview\n\n| Stage | Goal | How AI Helps | Key Tools |\n|-------|------|-------------|----------|\n| **Discovery** | Understand problems | Summarize interviews, detect patterns in feedback, generate hypotheses | ChatGPT, Dovetail |\n| **User Research** | Understand users | Cluster survey responses, sentiment analysis, draft personas | Typeform, Maze |\n| **Ideation** | Generate solutions | Brainstorm features, benchmark competitors, explore edge cases | ChatGPT, Miro |\n| **Prioritization** | Decide what to build | Simulate RICE scoring, model impact, surface trade-offs | Airtable, Coda |\n| **Strategy** | Define direction | Synthesize insights into a coherent vision, draft positioning | Notion AI, ChatGPT |\n| **PRD / Specs** | Document the product | Generate PRDs, user stories, acceptance criteria | Notion AI, Confluence |\n| **Design & UX** | Create the experience | Generate wireframe ideas, write UX copy, prototype concepts | Figma, Uizard |\n| **Development** | Build the product | Generate code, debug, build MVPs faster | GitHub Copilot, Cursor, Lovable |\n| **QA / Testing** | Ensure quality | Generate test cases, automate regression tests, detect bugs | Playwright, TestRail |\n| **Launch** | Go to market | Draft release notes, emails, and campaign content | ChatGPT, HubSpot |\n| **Analytics** | Measure performance | Analyze funnels, detect churn signals, generate insight summaries | Mixpanel, Amplitude |\n| **Growth & Iteration** | Improve the product | Generate A/B test hypotheses, identify funnel drop-off, spot opportunities | Optimizely, VWO |\n\n---\n\n## The Four Phases in Practice\n\n### Discover\n\nThe goal is to define the right problem before building anything. AI accelerates this by synthesizing large volumes of qualitative data — customer interviews, support tickets, NPS comments — into themes and hypotheses that would take a researcher days to extract manually.\n\nThe risk: AI can miss nuance and context. Use it to triage and cluster, then read the raw data yourself for the most important themes.\n\n### Validate\n\nBefore committing to a solution, validate that the problem is real and that your proposed approach will actually solve it. AI helps by enabling rapid prototype testing and simultaneous hypothesis generation across multiple directions.\n\nThe risk: AI-generated validation can feel more rigorous than it is. Real validation still requires real users.\n\n### Build\n\nAI tools — particularly code generation and low/no-code prototyping — can dramatically reduce the time between a PM's idea and something testable. Lovable, Cursor, and GitHub Copilot have meaningfully changed what's possible for a PM who can articulate requirements clearly.\n\nThe risk: AI-generated code needs review. Shipping AI-generated code without engineering oversight introduces technical debt and security risks.\n\n### Launch and Evaluate\n\nAI helps generate launch materials at scale (release notes, segment-specific emails, FAQ content) and automates the initial analysis of how a launch performed. The \"evaluate and iterate\" loop — data to insight to action — can run significantly faster when AI handles the data processing layer.\n\nThe risk: Automated insights are only as good as the metrics being fed into them. Garbage in, garbage out still applies.\n\n---\n\n## Choosing the Right Tool\n\nA few principles for tool selection:\n\n- **Don't add a tool for every stage.** Two or three well-integrated tools beat twelve loosely connected ones.\n- **Free tiers are enough to start.** ChatGPT, Figma, and Playwright have free tiers that cover most PM needs in the discovery and validation phases.\n- **The tool is not the strategy.** A PM who understands the problem and knows what question to ask will get more out of ChatGPT than one who doesn't, regardless of which premium AI tool they're using.",
+            'ai-biases-critical-thinking': "# AI Biases and Critical Thinking\n\n*Based on the LinkedIn course: Amplify Your Critical Thinking with Generative AI.*\n\nAI tools are useful, but they're not neutral. They reflect the data they were trained on, which means they carry the biases, gaps, and distortions present in that data. Using AI without understanding this leads to confident-sounding outputs built on flawed foundations.\n\n---\n\n## Key Terms\n\n| Term | Definition |\n|------|------------|\n| **Confirmation bias** | The tendency to seek out or accept only information that confirms existing beliefs, while ignoring contradictory evidence |\n| **Historical bias** | Bias that arises because AI training data reflects historical patterns — including historical inequalities and outdated norms |\n| **Critical thinking** | Questioning and evaluating information for reliability, relevance, and validity before acting on it |\n| **Skepticism** | An active, engaged form of doubt — not cynicism, but a deliberate refusal to accept claims without examination |\n| **Truth claim** | A statement presented as fact that actually requires context and is subject to legitimate debate |\n| **PIQPACC** | A critical thinking framework: Purpose, Information, Questions, Perspectives, Assumptions, Concepts, Conclusions |\n\n---\n\n## Historical Bias in AI\n\nAI models are trained on large corpora of text from the internet, books, and other sources. Those sources reflect the world as it was — including historical inequalities, outdated professional norms, and the biases of whoever produced the content.\n\nThis means that when you ask an AI a question about careers, markets, or demographics, the answer may be shaped by data that is years out of date or that reflects patterns that no longer hold.\n\n**Questions to surface historical bias:**\n- Is the information you're providing based on recent data, or could older training data be influencing it?\n- Does the career advice you're giving reflect current market conditions, or historical trends?\n- When you describe typical outcomes for [role/group], what time period does that reflect?\n\nFor product managers specifically: AI salary benchmarks, hiring trend data, and competitive landscape analysis may all be affected by historical bias. Treat them as starting points, not authoritative sources.\n\n---\n\n## Confirmation Bias — In Humans and AI\n\nConfirmation bias doesn't just affect the AI — it affects how you use it. If you ask AI to validate a decision you've already made, you'll get validation. The AI will find supporting arguments for almost any position, because it's designed to be responsive and helpful.\n\nThis is dangerous in product work because it feels like research but produces the same outcome you would have reached without it.\n\n**Strategies to counter this:**\n\nAsk the AI to argue the other side:\n> \"What are the strongest arguments *against* this product direction?\"\n\nAsk it to find disconfirming evidence:\n> \"What data might suggest this bet won't pay off?\"\n\nAsk it to surface assumptions:\n> \"What would have to be true for this strategy to succeed? What's most likely to be wrong?\"\n\n---\n\n## Applying the PIQPACC Framework to AI Output\n\nWhen evaluating anything an AI produces — analysis, research, recommendations — run it through these seven lenses:\n\n| Element | What to ask |\n|---------|------------|\n| **Purpose** | What is this information being used for? Does the AI's framing match my actual question? |\n| **Information** | Where did this come from? What sources does it reflect? How current is it? |\n| **Questions** | Am I asking the right question, or am I getting a precise answer to a vague question? |\n| **Perspectives** | Whose viewpoint is represented here? Who is missing? |\n| **Assumptions** | What has the AI taken for granted? What would change the answer if it weren't true? |\n| **Concepts** | Are key terms being used consistently and accurately? |\n| **Conclusions** | Does the conclusion follow from the evidence, or is it the AI filling a gap with a plausible-sounding guess? |\n\n---\n\n## Practical Prompts for More Reliable AI Output\n\nThese prompts are designed to force the AI to be more transparent about its limitations:\n\n- \"What are the limitations of the answer you just gave me?\"\n- \"How confident are you in this, and what would increase or decrease that confidence?\"\n- \"What information would you need to give a better answer?\"\n- \"Are there perspectives or data sources that would contradict what you just said?\"\n- \"Is this based on recent data, or are you drawing on older information?\"\n\nThe goal isn't to distrust AI — it's to use it as a thinking partner that helps you reason better, not as an oracle that relieves you of the need to think.",
+            'what-is-an-api': "# What Is an API?\n\nAPI stands for Application Programming Interface. It's a set of rules that allows one software system to communicate with another — without a visual interface, and without either system needing to know how the other one works internally.\n\nAs a PM, you don't need to know how to build an API. You do need to understand what they are, how they affect product decisions, and what questions to ask your engineering team about them.\n\n---\n\n## The Simple Explanation\n\nThink of a restaurant:\n\n- **You** are the client application\n- **The kitchen** is the server (where data or functionality lives)\n- **The waiter** is the API — it takes your request, brings it to the kitchen, and returns the result\n\nYou don't need to know how the kitchen works. The waiter (the API) handles the communication through a defined protocol: you ask in a specific format, you get a response in a specific format.\n\n---\n\n## Why APIs Matter for Product Decisions\n\n**They power invisible but critical features.** Address validation, payment processing, identity verification, weather data, maps — most of these work through third-party APIs. When these fail, your product fails, even if your code is fine.\n\n**They have performance implications.** Every API call takes time. If a user action triggers two or three API calls in sequence, those response times stack. PMs who don't account for this end up with features that work in demos and disappoint in production.\n\n**They have cost implications.** Many APIs are priced per call. A feature that seemed cheap to build can become expensive at scale if it triggers many API requests per user session. This needs to be factored into pricing models and gross margin calculations.\n\n**They create dependency risk.** If a third-party API you depend on changes its contract, raises prices, or goes down, your product is affected. That's a risk to track, not just an engineering concern.\n\n---\n\n## Key Questions to Ask Your Engineering Team\n\nWhen a feature relies on an API:\n\n- What is the expected response time for this API call, and what happens to the user experience if it takes 2–3× longer than expected?\n- What's the fallback behavior if the API is unavailable?\n- What's the cost per call, and what does that look like at 10× current usage?\n- Is this a third-party API we're dependent on, and are there alternatives if it changes?\n- Does this API have rate limits that could affect our heaviest users?\n\n---\n\n## Benefits of APIs\n\n- **Speed to market** — instead of building functionality from scratch, you integrate a service that already exists\n- **Reliability** — established APIs (Stripe for payments, Twilio for SMS) are often more reliable than custom-built alternatives\n- **Developer velocity** — well-documented APIs let developers build faster with fewer unknowns\n\n---\n\n## Recommended Listening\n\nThese podcast episodes offer accessible perspectives on technical products for non-engineers:\n\n**Women in Product — Ep. 65: Technical Products**\nCovers how to work on products that have no visual interface, how to define requirements for API products, and how to break down technical work for cross-functional teams.\n[Listen on Spotify](https://open.spotify.com/episode/0fGb1G30pvWjCs4ETO5G0S)\n\n**Product Guru's — Ep. 99: The Importance of the API (Vagner Fiuza)**\nA practical walkthrough of API products in the context of product metrics, measurement, and business value — in Portuguese.\n[Listen on Spotify](https://open.spotify.com/episode/59QIYA8XxoQXRzP1EBLeeI)",
+            'hiring-manager-prompts': "# Hiring Manager Interview — AI Prompts\n\nAI can meaningfully improve your interview preparation — if you use it to go deeper, not just to generate generic answers. These prompts are designed to be adapted to a specific company and role, not used as-is.\n\nReplace every `[bracket]` before running the prompt.\n\n---\n\n## Before the Interview\n\n### 1. Company Research\n\n> \"I have an interview with [company] for the position of [job title]. Analyze their mission, core products or services, recent news, and any strategic shifts in the last 12 months. Identify what challenges they're likely trying to solve and what a PM in this role would be expected to prioritize.\"\n\nThis gives you more than a summary — it gives you a strategic frame for how to position yourself in the conversation.\n\n### 2. Cover Letter\n\n> \"Based on this job description for [job title] at [company], write a cover letter that connects my experience in [your background] to their stated priorities. Avoid generic language. Focus on what's specific to this company and role.\"\n\nReview it critically before sending — AI cover letters tend to be polished but flat. Add a specific, personal reason why you want this role.\n\n### 3. Resume Tailoring\n\n> \"Review this job description and identify the 5–7 most important skills or experiences the role requires. Then look at my resume and tell me: which of those do I demonstrate clearly, which do I demonstrate weakly, and which are missing? Suggest specific rewrites for the weak areas.\"\n\nThis is more useful than asking AI to \"improve\" your resume in the abstract.\n\n---\n\n## Preparing for the Interview\n\n### 4. Industry Trends and Challenges\n\n> \"For the position of [job title] at [company] in the [industry] sector, what are the 3–5 most important challenges or trends I should be prepared to discuss? What would make a strong answer look like in an interview context?\"\n\n### 5. Common Interview Questions\n\n> \"Generate a list of the 10 most likely interview questions for a [job title] role at a [company type, e.g., B2B SaaS, fintech, marketplace]. Include both behavioral and product-sense questions.\"\n\n### 6. Behavioral Questions with STAR Prep\n\n> \"Create 5 behavioral interview questions relevant to [job title] at [company]. For each one, suggest how to structure a strong answer using the STAR method (Situation, Task, Action, Result), tailored to someone with experience in [your background].\"\n\n### 7. Technical or Skills Assessment Practice\n\n> \"I need to demonstrate [skill, e.g., SQL for funnel analysis, writing user stories, running a prioritization framework] for a PM role at [company]. Give me 3 realistic practice exercises at the level of rigor this type of company would expect.\"\n\n---\n\n## After the Interview\n\n### 8. Follow-Up Email\n\n> \"Draft a follow-up email for after my interview for [job title] at [company]. The email should thank them for their time, reference one specific topic we discussed ([topic]), reiterate my interest, and briefly state how my background in [area] addresses the challenge we talked about.\"\n\nDon't send the AI draft verbatim. Personalize it with a specific detail from the conversation.\n\n---\n\n## Salary Negotiation\n\n### 9. Salary Research and Negotiation Framing\n\n> \"What is the market rate for a [job title] with [X years] of experience in [location/remote]? Give me a realistic range and the key factors that push toward the higher end. Then suggest 3 ways to frame a salary negotiation that don't start with an apology.\"\n\n### 10. LinkedIn Outreach\n\n> \"Write a short LinkedIn message (under 150 words) to send to a [job title] currently working at [company]. I'm interviewing there for [role] and want to learn about the team culture and how they actually work day-to-day — not information I can get from the website. Make the message specific and respectful of their time.\"",
+            'case-interview-guide': "# Case Interview Guide\n\nCase interviews for Product Manager roles test how you think, not just what you know. Interviewers are looking for structure, judgment, and the ability to make reasonable calls under uncertainty — not perfect answers.\n\n---\n\n## What Interviewers Are Actually Evaluating\n\n**Can you structure ambiguous problems?** Open-ended questions are intentionally vague. The ability to break them into components — and communicate that breakdown clearly — is the core skill being tested.\n\n**Do you have strong product instincts?** PMs rarely have all the data they'd like. Interviewers want to see that you can make sound decisions from incomplete information and explain your reasoning.\n\n**Are you driving or being driven?** The best candidates lead the conversation — they ask clarifying questions, state their approach before diving in, narrate their thinking, and surface trade-offs. Avoid waiting to be guided.\n\n---\n\n## How to Structure Your Approach\n\n1. **Clarify the question** — before answering, make sure you understand the actual problem. Asking a clarifying question is a signal of rigor, not uncertainty.\n2. **State your framework** — tell the interviewer how you're going to approach it before you start. \"I want to think about this in three parts: the user segment, their pain points, and potential solutions.\"\n3. **Go broad before going deep** — explore the space before committing to one direction.\n4. **Make explicit trade-offs** — don't just pick a solution, explain why you're prioritizing this over alternatives.\n5. **Tie back to metrics** — what does success look like, and how would you measure it?\n\n---\n\n## Useful Frameworks\n\nYou don't need to memorize these — you need to understand when each one is appropriate.\n\n| Framework | Best used for |\n|-----------|---------------|\n| **SWOT** (Strengths, Weaknesses, Opportunities, Threats) | Strategic positioning, competitor analysis |\n| **Porter's Five Forces** | Assessing industry competition and market attractiveness |\n| **4Ps / Marketing Mix** (Product, Price, Place, Promotion) | Go-to-market strategy, pricing decisions |\n| **AIDA** (Attention, Interest, Desire, Action) | Customer acquisition and conversion funnel design |\n| **REAN** (Reach, Engage, Activate, Nurture) | Digital marketing campaign planning |\n| **Five Cs** (Company, Customers, Competitors, Collaborators, Context) | Full business environment analysis |\n\n---\n\n## Question Types and How to Handle Them\n\n### Strategy Questions\n\nThese evaluate whether you can think at both the company level and the product level.\n\n| Level | Sample Questions |\n|-------|------------------|\n| **Micro** | What is the business model for this product? What would need to be true for it to succeed? Will customers want it? |\n| **Macro** | How does this product fit into the company's overall vision? Does it open new markets or defend existing ones? |\n\nFor macro questions, frameworks like SWOT and Porter's Five Forces are useful. For micro questions, focus on the specific mechanics of the business model.\n\n### Product Sense Questions\n\nThese test whether you can think about users rigorously and generate creative solutions.\n\n**Structure your answer like this:**\n\n1. **Motivation** — why should we build this? Is it aligned with the company's mission?\n2. **User segmentation** — who specifically are we building for? Consider: size of the segment, frequency of use, willingness to pay.\n3. **Pain points** — what specific problem does this user have? What are they doing today instead?\n4. **Solutions** — what could we build? What's innovative here — not just a copy of something that already exists?\n\nWhen proposing a solution, acknowledge if something similar already exists and explain what you'd add or improve. This is more impressive than pretending the space is blank.\n\n### Launch Questions\n\n| Stage | Key Questions |\n|-------|---------------|\n| **Product** | What is the core value proposition? Who is the target user? |\n| **Launch Goals** | What does success look like? What are the KPIs? |\n| **Launch Design** | What messaging will resonate? Which channels will you prioritize? |\n| **Pre-launch** | How will you test? What beta feedback do you need? |\n| **During launch** | How will you handle unexpected issues? Who owns what? |\n| **Post-launch** | How will you measure results? What will you iterate on? |\n\n### Pricing Questions\n\n| Strategy | When to use it |\n|----------|----------------|\n| **Cost-plus** | Stable, predictable costs; low price sensitivity |\n| **Value-based** | Premium product with clear, differentiated value |\n| **Competitive** | Commoditized market; differentiation is limited |\n| **Experimental** | New product category; willingness-to-pay is unknown |\n\n### Problem-Solving (Metric Drop) Questions\n\nWhen a metric falls, don't jump to conclusions. Work through the problem systematically:\n\n1. **Clarify the metric** — how is it defined, and over what timeframe did it drop?\n2. **Check for external factors** — seasonality, outages, data pipeline issues, competitor moves\n3. **Segment the data** — is the drop uniform, or concentrated in a specific platform, region, or user cohort?\n4. **Hypothesize causes** — list possible explanations before investigating any of them\n5. **Prioritize hypotheses** — which ones are most likely, and which ones are easiest to test?\n6. **Recommend next steps** — what would you investigate first, and what would you do if that hypothesis is confirmed?\n\n---\n\n## What Not to Do\n\n- Asking clarifying questions that won't change your answer (it signals you're buying time, not being rigorous)\n- Assuming you're building for the company you're interviewing at — the question often describes a different product\n- Jumping straight to a solution without framing the user and problem first\n- Choosing a framework and filling it in mechanically without applying judgment\n- Forgetting to discuss trade-offs — the best answers acknowledge what you're giving up\n\n---\n\n## Preparation Checklist\n\n- [ ] Review SWOT, Porter's Five Forces, 4Ps, and RICE — know when to use each\n- [ ] Practice a metric-drop question from scratch, out loud\n- [ ] Practice a \"design a product for X\" question, timing yourself\n- [ ] Write out 3–5 STAR stories from your experience that cover leadership, data-driven decisions, and stakeholder conflict\n- [ ] Research the company's products, business model, and recent news before the interview",
+            'product-podcasts': "# Product Podcasts\n\nA curated list of podcasts for product managers — in Portuguese and English. Organized by language, with a short note on what each one covers.\n\n---\n\n## Portuguese\n\n**Product Guru's**\nOne of the most established Brazilian PM podcasts. Covers the full spectrum — strategy, metrics, career, and technical product management. Episode #99 with Vagner Fiuza on APIs is particularly good for non-technical PMs.\n[Listen on Spotify](https://open.spotify.com/show/7uRmxP1l3m9kwrsTYxnIMA)\n\n**Produto pelo Mundo**\nInterviews with Brazilian PMs working internationally. Useful if you're navigating a career transition to Europe or the US.\n[Listen on Spotify](https://open.spotify.com/show/5PD1bRaJz3irxq712zF566)\n\n**Mulheres de Produto**\nFocused on women in product. Covers leadership, career development, and the structural challenges of the profession.\n[Listen on Spotify](https://open.spotify.com/show/1rfUWxL2Ia7kA343ClLya1)\n\n**Analytics Talk**\nData and analytics focused, with guests from product and data science backgrounds. Strong for anyone looking to deepen their quantitative skills.\n[Listen on Spotify](https://open.spotify.com/show/4qP97l3OJO9vH37fWhrbB7)\n\n---\n\n## English\n\n**This Is Product Management**\nInterviews with PMs from a wide range of industries. Episodes vary significantly in depth — worth filtering by topic rather than listening chronologically.\n[Listen on Spotify](https://open.spotify.com/show/5qoM5evv8FUvaqkSY6OHzn)\n\n**The Product Podcast**\nProduced by Product School. Practical content on PM skills, career, and frameworks. Good for structured learning.\n[Listen on Spotify](https://open.spotify.com/show/1XBrhVLsQOIAv3KFBqnzrX)\n\n**Metric Stack**\nAnalytics and data-focused. Covers how product and data teams collaborate, measurement strategy, and experimentation. Recommended for anyone working in growth or analytics.\n[Listen on Spotify](https://open.spotify.com/show/7ksflmEcFHX9XQOlMlE25Z)\n\n**MetrikUp**\nFocused on product metrics and growth. More technical than most PM podcasts — good for PMs who want to go deeper on measurement.\n[Listen on Spotify](https://open.spotify.com/show/2p60u4FF6HIrNX5CDQbF69)"
+        };
+
+        var searchIndex = {};
+        var currentPage = 'home';
+
+        function buildSearchIndex() {
+            for (var key in allDocuments) {
+                if (allDocuments.hasOwnProperty(key)) {
+                    var content = allDocuments[key].toLowerCase();
+                    var words = content.split(/\s+/);
+                    for (var i = 0; i < words.length; i++) {
+                        var word = words[i].replace(/[^a-z0-9]/g, '');
+                        if (word.length > 2) {
+                            if (!searchIndex[word]) {
+                                searchIndex[word] = [];
+                            }
+                            if (searchIndex[word].indexOf(key) === -1) {
+                                searchIndex[word].push(key);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function showHome() {
+            currentPage = 'home';
+            document.getElementById('homeContent').style.display = 'grid';
+            document.getElementById('contentMarkdown').style.display = 'none';
+            document.getElementById('pageTitle').textContent = 'Learn About Product';
+            updateActiveNav('home');
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        function showPage(pageKey) {
+            if (!allDocuments[pageKey]) return;
+
+            currentPage = pageKey;
+            var content = allDocuments[pageKey];
+            var htmlContent = marked.parse(content);
+
+            document.getElementById('homeContent').style.display = 'none';
+            document.getElementById('contentMarkdown').style.display = 'block';
+            document.getElementById('contentMarkdown').innerHTML = htmlContent;
+
+            var titleMatch = content.match(/^# (.+)$/m);
+            var title = titleMatch ? titleMatch[1] : pageKey;
+            document.getElementById('pageTitle').textContent = title;
+
+            updateActiveNav(pageKey);
+            document.getElementById('contentArea').scrollTop = 0;
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        function updateActiveNav(pageKey) {
+            var items = document.querySelectorAll('.nav-item');
+            for (var i = 0; i < items.length; i++) {
+                items[i].classList.remove('active');
+                if (items[i].getAttribute('data-page') === pageKey) {
+                    items[i].classList.add('active');
+                }
+            }
+        }
+
+        function performSearch(query) {
+            if (!query || query.length < 2) {
+                document.getElementById('searchResults').classList.remove('show');
+                return;
+            }
+
+            var lowerQuery = query.toLowerCase();
+            var results = {};
+
+            for (var word in searchIndex) {
+                if (word.indexOf(lowerQuery) !== -1) {
+                    var pages = searchIndex[word];
+                    for (var i = 0; i < pages.length; i++) {
+                        if (!results[pages[i]]) {
+                            results[pages[i]] = 0;
+                        }
+                        results[pages[i]]++;
+                    }
+                }
+            }
+
+            var sortedPages = Object.keys(results).sort(function(a, b) {
+                return results[b] - results[a];
+            }).slice(0, 5);
+
+            var resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+
+            for (var j = 0; j < sortedPages.length; j++) {
+                var pageKey = sortedPages[j];
+                var firstLine = allDocuments[pageKey].split('\n')[0].replace('# ', '');
+                var item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.textContent = firstLine;
+                item.onclick = (function(pk) {
+                    return function() {
+                        showPage(pk);
+                        document.getElementById('searchResults').classList.remove('show');
+                        document.getElementById('searchInput').value = '';
+                    };
+                })(pageKey);
+                resultsContainer.appendChild(item);
+            }
+
+            resultsContainer.classList.add('show');
+        }
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function closeSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.remove('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            buildSearchIndex();
+
+            document.getElementById('searchInput').addEventListener('input', function(e) {
+                performSearch(e.target.value);
+            });
+
+            document.getElementById('searchInput').addEventListener('blur', function() {
+                setTimeout(function() {
+                    document.getElementById('searchResults').classList.remove('show');
+                }, 200);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.search-box')) {
+                    document.getElementById('searchResults').classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

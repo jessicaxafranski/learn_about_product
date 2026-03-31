@@ -1,43 +1,62 @@
-# Product Strategy
+# Learn About Product
 
-## Product Lifecycle 
+A structured knowledge base for Product Managers covering strategy, data, AI, technical concepts, and career preparation.
 
-* [Critical thinking](https://github.com/jessicaxafranski/learn_about_product/blob/main/critical_thinking.md)
-* [Building a Product Roadmap](https://github.com/jessicaxafranski/learn_about_product/blob/main/build_pb.md)
+This repository compiles notes, frameworks, and resources from real PM courses, podcasts, and hands-on practice. The goal is to serve as a reference — not a textbook — so each document is written to be actionable and direct.
 
-## Data and Metrics
+---
 
-* [Why data-driven is important for your product?](https://github.com/jessicaxafranski/learn_about_product/blob/main/data_driven.md) 
-* [How to create KR'S](https://github.com/jessicaxafranski/learn_about_product/blob/main/create_KR.md)
+## Table of Contents
 
-* [Performance indicators](https://github.com/jessicaxafranski/learn_about_product/blob/main/performance_indicators.md);
+### Strategy
+- [Critical Thinking](strategy/critical-thinking.md)
+- [Building a Product Roadmap](strategy/product-roadmap.md)
 
-## AI
+### Data & Metrics
+- [Why Data-Driven Decisions Matter](data-metrics/data-driven-decisions.md)
+- [How to Create Key Results (KRs)](data-metrics/key-results.md)
+- [Performance Indicators](data-metrics/performance-indicators.md)
+- [A/B Testing](data-metrics/ab-testing.md)
+- [Case Study: Acquisition & Retention Metrics](data-metrics/product-kpis-case-study.md)
 
-* [Generative AI for Product Managers](https://github.com/jessicaxafranski/learn_about_product/blob/main/generativeAI_PM.md)
-* [TOOLS - AI in Product Management (End-to-End)](https://github.com/jessicaxafranski/learn_about_product/blob/main/AI_tools.md)
+### AI
+- [Generative AI for Product Managers](ai/generative-ai-for-pms.md)
+- [AI Tools Across the Product Lifecycle](ai/ai-tools-end-to-end.md)
+- [AI Biases and Critical Thinking](ai/ai-biases-critical-thinking.md)
 
-## Other contents 
-
-### Technical 
-
-* [What's the API?](https://github.com/jessicaxafranski/learn_about_product/blob/main/about_api.md)
+### Technical
+- [What Is an API?](technical/what-is-an-api.md)
 
 ### Interviews
+- [Hiring Manager Interview — AI Prompts](interviews/hiring-manager-prompts.md)
+- [Case Interview Guide](interviews/case-interview-guide.md)
 
-* [Hiring Manager interview](https://github.com/jessicaxafranski/learn_about_product/blob/main/prompt_job.md)
-* [Technical Interview](https://github.com/jessicaxafranski/learn_about_product/blob/main/case_interview.md)
-   
-## Product Podcasts
+### Resources
+- [Product Podcasts](resources/product-podcasts.md)
 
-## Brazilians podcast:
-- [Product Guru's](https://open.spotify.com/show/7uRmxP1l3m9kwrsTYxnIMA?si=8da16b4c305f4172)
-- [Produto pelo mundo](https://open.spotify.com/show/5PD1bRaJz3irxq712zF566?si=9048ed8a4ace4c09)
-- [Mulheres de produto](https://open.spotify.com/show/1rfUWxL2Ia7kA343ClLya1?si=30724932a59a44ae)
-- [Analytics talk](https://open.spotify.com/show/4qP97l3OJO9vH37fWhrbB7?si=ab437ae440394fa1)
+---
 
-## Internacional podcast:
-- [This is Product Management](https://open.spotify.com/show/5qoM5evv8FUvaqkSY6OHzn?si=5ddc4b6558dc432a)
-- [The Product Podcast](https://open.spotify.com/show/1XBrhVLsQOIAv3KFBqnzrX?si=1c10051bf4ae4cff)
-- [Metric Stack](https://open.spotify.com/show/7ksflmEcFHX9XQOlMlE25Z?si=bed2cfb67f194135)
-- [MetrikUp](https://open.spotify.com/show/2p60u4FF6HIrNX5CDQbF69?si=4ee63fa82e0e47ab)
+## File Naming Convention
+
+All files follow **lowercase kebab-case**: `topic-name.md`.
+
+Folders group content by theme. No files live at the root level except this README.
+
+---
+
+## Contributing
+
+If you want to add a document, follow this checklist before opening a PR:
+
+- [ ] File is named in lowercase kebab-case with `.md` extension
+- [ ] File is placed in the correct folder
+- [ ] Document has a clear `# H1` title
+- [ ] Content is written in your own words (no raw AI output)
+- [ ] No draft comments or TODOs left in the file
+- [ ] The new file is linked in this README
+
+---
+
+## Author
+
+[Jessica Afranski](https://github.com/jessicaxafranski)
