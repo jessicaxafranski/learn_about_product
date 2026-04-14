@@ -83,34 +83,18 @@ You can think of the orchestrator as the system's traffic controller.
 
 These patterns are often combined: an orchestrator may call several specialized agents, and some of them may run in parallel.
 
-- [Custom Sub-Agents Guide (Claude Code for PMs)](https://ccforpms.com/fundamentals/custom-subagents)
+### Agents vs. Sub-Agents
 
-The description below was adapted from the model referenced above.
+| | Agents | Sub-Agents |
+|---|---|---|
+| **Lifespan** | Created on the fly, used once | Saved permanently in `.claude/agents/` |
+| **Purpose** | Parallel batch work | Specialized expertise |
+| **Best for** | Many similar tasks at once | Recurring, distinct roles |
+| **Example** | Process 10 meeting notes simultaneously | Get technical feedback on a spec |
 
-Module 1.4 agents: Temporary clones for parallel batch work
-* Created on the fly, used once, then gone
-* "Create 10 agents to process 10 meeting notes simultaneously"
-* All doing the same type of task at the same time
-* Generic capabilities — just copies of me
-* Use when you have many similar tasks to do right now
-Module 1.5 sub-agents: Permanent specialized team members
-* Saved in .claude/agents/ folder, available forever
-* "Use the Executive sub-agent to review this spec"
-* Each one has a distinct personality, expertise, and communication style
-* Called repeatedly whenever you need that perspective
-* Use when you need specialized expertise on an ongoing basis
+**Analogy:** Agents are temp workers hired for one busy day. Sub-agents are your permanent team — engineer, executive, researcher — you call on every week.
 
-Simple analogy:
-* Agents = hiring 10 temp workers for one busy Friday to process paperwork
-* Sub-agents = having a permanent team (engineer, executive, researcher) you call on every week
-When to use which:
-* Processing 15 user interviews at once → agents (parallel batch)
-* Getting technical feedback on a spec → sub-agent (Engineer, every time)
-* Researching 5 competitors simultaneously → agents (parallel batch)
-* Writing an executive summary → sub-agent (Executive, every time)
-Does that distinction make sense now?
-Now here's the best part — you don't have to build these from scratch. There are 100+ pre-built sub-agents in community libraries. Just copy the .md files into your .claude/agents/ folder and they're ready to use.
-
+> 100+ pre-built sub-agents are available in community libraries. Copy the `.md` files into your `.claude/agents/` folder and they're ready to use.
 
 ---
 
