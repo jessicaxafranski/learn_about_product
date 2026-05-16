@@ -8,6 +8,7 @@ I built both of these from scratch — check them out:
 
 - [Learning Hub](https://jessicaxafranski.github.io/learn_about_product/) — my PM knowledge base
 - [Portfolio](https://jessicaxafranski.github.io/jessxaf-site/index.html) — my projects and case studies
+- [AI Coffee Personality](https://ai-coffee-personality-quizz.vercel.app/) — A cozy, interactive quizz that matches users with their coffee alter ego using AI-driven logic. Built from scratch with Next.js, React, and TypeScript, blending playful design with a strong focus on user experience and engagement.
 
 ---
 
