@@ -59,6 +59,33 @@ In practice, many real systems combine more than one of these behaviors.
 
 ---
 
+## Conversational Agents vs. Task Agents
+
+Two broad interaction styles define how an agent works with a user.
+
+| | Conversational Agent | Task Agent |
+|---|---|---|
+| **What it does** | Has a back-and-forth dialogue with the user | Receives a goal and executes it autonomously |
+| **User involvement** | High — the user guides the conversation | Low — the agent works mostly on its own |
+| **Output** | A response, suggestion, or question | A completed result or deliverable |
+| **When it stops** | When the user ends the conversation | When the task is done |
+| **Best for** | Exploration, Q&A, coaching, brainstorming | Workflows, data processing, content generation |
+| **Example** | A user asks "how should I improve this CV?" and the agent asks follow-up questions | The agent receives a CV and a job description, runs analysis, and returns a tailored draft |
+
+**Sample — Conversational Agent:**
+> User: "I'm applying for a PM role. What should I highlight?"
+> Agent: "What industry is the role in? And do you have experience with roadmapping tools?"
+> *(The agent asks questions and adjusts its guidance based on each answer.)*
+
+**Sample — Task Agent:**
+> Input: CV file + job description
+> Agent runs: reads both → identifies gaps → rewrites CV → saves output
+> *(No conversation. The agent completes the full task and delivers a result.)*
+
+Most real-world systems combine both: a conversational layer captures what the user wants, then hands off to a task agent to execute it.
+
+---
+
 ## Orchestrator
 
 The orchestrator is the coordinating layer of a multi-agent system.
@@ -140,4 +167,4 @@ Agents are less useful when the process is simple, repetitive, and fully predict
 
 ## Diagram
 
-![AI Agents Diagram](./images/agents_diagram.png)
+![AI Agents Diagram](../images/agents_diagram.png)
