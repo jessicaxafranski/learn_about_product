@@ -1,0 +1,150 @@
+# AI OS
+
+### The context layer between you and Claude
+
+Most people start every AI conversation from zero. AI OS fixes that.
+
+It's a structured prompt I built to give Claude persistent context about how I think, what I'm working on, and how I want to be challenged — so I don't spend the first 10 messages re-explaining myself every time I open a new chat.
+
+The document maps five layers: identity, communication style, current priorities, daily constraints, and hard rules. Together they function like a system prompt for my own workflow — the difference between Claude giving me generic output and Claude operating like a thinking partner who already knows my context.
+
+One document. Paste once. Every conversation starts where it should.
+
+---
+
+## Understanding Claude's Key Features
+
+Before building your AI OS, it helps to understand how Claude is structured — and which features make persistent context possible.
+
+---
+
+### Claude
+
+Claude is an AI assistant built by Anthropic. It's designed to reason, write, analyze, and problem-solve across almost any domain — from strategy documents to code to creative work.
+
+Unlike a search engine, Claude doesn't retrieve information — it generates responses based on context. That's why **what you put in the conversation matters**. The more context you give, the more useful the output.
+
+> **Example:** Asking "write a product brief" gets a generic template. Asking "write a product brief for a B2B SaaS targeting operations teams, using direct language and no corporate jargon" gets something you can actually use.
+
+---
+
+### Projects
+
+Projects are Claude's way of giving you a persistent workspace. Instead of starting fresh in every conversation, a Project lets you:
+
+- Store background context that Claude always has access to
+- Upload files (docs, spreadsheets, briefs) Claude can reference in any chat
+- Set custom instructions that apply to every conversation in that project
+
+Think of a Project as a dedicated assistant who already read your company wiki before your first meeting.
+
+> **Example:** You create a project called "Product Strategy." You upload your roadmap, your team's OKRs, and your AI OS. Now every conversation in that project starts with Claude already knowing your priorities, your constraints, and how you like to work.
+
+---
+
+### Instructions
+
+Instructions are the rules you set for how Claude should behave — its tone, format, constraints, and boundaries — applied automatically to every conversation.
+
+You can set instructions at the Project level (applies to all chats in that project) or globally (applies everywhere).
+
+This is the core of the AI OS concept: instead of re-explaining yourself every time, you define your preferences once and Claude follows them by default.
+
+> **Example instructions:**
+> - "Always respond in bullet points unless I ask for prose."
+> - "Don't start responses with 'Great question!' or affirmations."
+> - "When I share an idea, challenge it before validating it."
+
+---
+
+### Artifacts
+
+Artifacts are standalone outputs Claude generates that live in a dedicated side panel — separate from the chat. They're designed for content you want to keep, copy, or iterate on without it getting buried in the conversation.
+
+Artifacts can be:
+- **Documents** — briefs, reports, plans
+- **Code** — scripts, functions, full files
+- **HTML pages** — interactive tools or mockups rendered directly in the browser
+- **SVG graphics** — diagrams and visual assets
+
+> **Example:** You ask Claude to build a competitor analysis table. Instead of pasting it into the chat, Claude creates an Artifact — a clean, copyable document that stays visible on the right side of the screen while you continue the conversation.
+
+---
+
+### Skills
+
+Skills are pre-built capabilities that extend what Claude can do beyond text generation. They allow Claude to take actions, use tools, or follow structured workflows — not just respond.
+
+Depending on the platform and plan, Skills can include:
+
+- **Web search** — look up current information in real time
+- **Code execution** — run and test code, not just write it
+- **File analysis** — read and extract data from uploaded documents
+- **Integrations** — connect to external tools and services
+
+> **Example:** Instead of asking Claude to estimate a market size from memory, you enable web search as a skill. Claude pulls current data, synthesizes it, and gives you a grounded answer — not a hallucinated one.
+
+---
+
+---
+
+### Agents
+
+An agent is Claude operating autonomously — not just answering a question, but working through a multi-step task on its own, making decisions along the way, and using tools to get things done.
+
+In a normal conversation, you prompt → Claude responds → you react. With an agent, you set a goal and Claude figures out the steps, executes them in sequence, checks results, and adjusts — without you guiding each move.
+
+Agents can:
+- Break a complex task into sub-tasks and execute each one
+- Use tools (search, code execution, APIs) at the right moment
+- Loop back and self-correct if something doesn't work
+- Hand off to another agent specialized for a specific step
+
+> **Example:** You ask an agent to "research the top 5 competitors in the project management space, summarize their positioning, and draft a comparison table." The agent searches the web, reads the pages, extracts relevant data, structures it, and delivers the table — without you doing anything between the request and the result.
+
+---
+
+### Workflows
+
+A workflow is a defined sequence of steps that runs automatically when triggered — no manual input needed at each stage. Where an agent decides its own path, a workflow follows a fixed path you designed in advance.
+
+Think of it as automation with Claude in the loop. You map out the logic once: if X happens, do Y, then Z. Claude handles the reasoning and language parts; the workflow handles the orchestration.
+
+Workflows can be:
+- **Linear** — step 1 → step 2 → step 3, always in that order
+- **Conditional** — if the output meets a condition, go one way; if not, go another
+- **Triggered** — start automatically when something happens (a form submission, a new file, a calendar event, an API call)
+
+Common workflow tools that connect Claude to the rest of your stack: **N8N**, **Make**, **Zapier**.
+
+> **Example:** A user fills out a discovery form on your website. The workflow triggers automatically: Claude reads the answers, scores the lead, drafts a personalized follow-up email, and adds a summary to your CRM — all without you touching it.
+
+---
+
+### Skills vs. Agents — What's the difference?
+
+This is one of the most common points of confusion. Both extend Claude's capabilities beyond conversation, but they operate at different levels.
+
+| | **Skills** | **Agents** |
+|---|---|---|
+| **What it is** | A single tool or capability Claude can use | Claude running a full workflow autonomously |
+| **Scope** | One action at a time | Multiple steps, decisions, and tool calls |
+| **Who drives it** | You stay in control; Claude uses the skill when needed | Claude drives the process toward a goal |
+| **Example** | Claude uses web search to answer one question | Claude searches, reads, summarizes, and drafts a report on its own |
+
+**Simple way to think about it:**
+
+- A **Skill** is a tool in Claude's toolbox — a hammer, a screwdriver.
+- An **Agent** is Claude picking up the right tools, deciding the order to use them, and building the thing — while you wait for the result.
+
+Skills make Claude more capable. Agents make Claude more autonomous.
+
+> **When to use which:**
+> Use a **Skill** when you want Claude to do one specific thing better (search the web, run code).
+> Use an **Agent** when you want Claude to own an entire task end-to-end, not just assist with a single step.
+
+---
+
+> **How these features work together:**
+> Build a Project → add your AI OS as Instructions → upload relevant files → enable the Skills you need → set up Agents for recurring multi-step workflows.
+> That's the full stack. Every conversation starts with context, constraints, and capability already in place.

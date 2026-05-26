@@ -539,6 +539,9 @@
             <div class="nav-sub-title">Tools &amp; Workflows</div>
             <div class="nav-item" onclick="showPage('ai-tools-end-to-end')" data-page="ai-tools-end-to-end">AI Tools End-to-End</div>
             <div class="nav-item" onclick="showPage('n8n')" data-page="n8n">N8N Workflow</div>
+            <div class="nav-sub-title">Claude</div>
+            <div class="nav-item" onclick="showPage('claude-building-blocks')" data-page="claude-building-blocks">Claude Building Blocks</div>
+            <div class="nav-item" onclick="showHtmlPage('ai-os-builder')" data-page="ai-os-builder">AI OS Builder</div>
         </div>
 
         <div class="nav-section">
@@ -630,6 +633,7 @@
             </div>
 
             <div id="contentMarkdown" class="markdown-content" style="display:none;"></div>
+            <iframe id="contentIframe" style="display:none;border:none;width:100%;height:100%;" src=""></iframe>
         </div>
     </div>
 
@@ -650,6 +654,7 @@
             'prompt-anatomy':           'ai/agents/prompt-anatomy.md',
             'ai-tools-end-to-end':      'ai/tools-and-workflows/ai-tools-end-to-end.md',
             'n8n':                      'ai/tools-and-workflows/N8N.md',
+            'claude-building-blocks':   'ai/claude/claude-building-blocks.md',
             'what-is-an-api':           'technical/what-is-an-api.md',
             'hiring-manager-prompts':   'interviews/hiring-manager-prompts.md',
             'case-interview-guide':     'interviews/case-interview-guide.md',
@@ -666,12 +671,30 @@
             return html.replace(/<a href=/g, '<a target="_blank" rel="noopener noreferrer" href=');
         }
 
+        var htmlPages = {
+            'ai-os-builder': 'ai/claude/ai-os-builder.html'
+        };
+
         function showHome() {
             currentPage = 'home';
             document.getElementById('homeContent').style.display = 'grid';
             document.getElementById('contentMarkdown').style.display = 'none';
+            document.getElementById('contentIframe').style.display = 'none';
             document.getElementById('pageTitle').textContent = 'Learn About Product';
             updateActiveNav('home');
+            if (window.innerWidth <= 768) closeSidebar();
+        }
+
+        function showHtmlPage(pageKey) {
+            if (!htmlPages[pageKey]) return;
+            currentPage = pageKey;
+            document.getElementById('homeContent').style.display = 'none';
+            document.getElementById('contentMarkdown').style.display = 'none';
+            var iframe = document.getElementById('contentIframe');
+            iframe.src = htmlPages[pageKey];
+            iframe.style.display = 'block';
+            document.getElementById('pageTitle').textContent = 'AI OS Builder';
+            updateActiveNav(pageKey);
             if (window.innerWidth <= 768) closeSidebar();
         }
 
@@ -703,6 +726,7 @@
         function displayPage(pageKey, content) {
             currentPage = pageKey;
             document.getElementById('homeContent').style.display = 'none';
+            document.getElementById('contentIframe').style.display = 'none';
             document.getElementById('contentMarkdown').style.display = 'block';
             document.getElementById('contentMarkdown').innerHTML = renderMarkdown(content);
             var titleMatch = content.match(/^# (.+)$/m);

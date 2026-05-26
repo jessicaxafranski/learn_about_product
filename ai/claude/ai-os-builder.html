@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI OS Builder</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --accent: #7c3aed;
+      --accent-light: #ede9fe;
+      --accent-dark: #5b21b6;
+      --text: #111827;
+      --muted: #6b7280;
+      --preview-bg: #1e1e1e;
+      --preview-text: #d4d4d4;
+      --preview-label: #9ca3af;
+      --preview-section: #a78bfa;
+      --preview-key: #86efac;
+      --radius: 10px;
+      --gap: 24px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── Banner ── */
+    .banner {
+      background: var(--accent-light);
+      border-bottom: 1px solid #c4b5fd;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: #5b21b6;
+    }
+    .banner svg { flex-shrink: 0; }
+
+    /* ── Header ── */
+    header {
+      padding: 28px 32px 0;
+    }
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    header p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ── Intro ── */
+    .intro {
+      margin: 20px 32px 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+    }
+    .intro-body h2 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .intro-body p {
+      font-size: 13.5px;
+      color: #374151;
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+    .intro-body p:last-child { margin-bottom: 0; }
+    .intro-tag {
+      background: var(--accent-light);
+      color: #5b21b6;
+      border: 1px solid #c4b5fd;
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      padding: 20px 32px 40px;
+      max-width: 1400px;
+    }
+
+    /* ── Form Panel ── */
+    .form-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .card-num {
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+    }
+
+    .field { margin-bottom: 12px; }
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: #374151;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 13px;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+      resize: vertical;
+    }
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,58,237,.12);
+    }
+    textarea { min-height: 68px; }
+
+    .tip {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 8px;
+      padding-left: 4px;
+    }
+
+    /* priorities */
+    .priorities { display: flex; flex-direction: column; gap: 7px; }
+    .priority-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .priority-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      width: 18px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* routine rows */
+    .routine-rows { display: flex; flex-direction: column; gap: 7px; }
+    .routine-row { display: grid; grid-template-columns: 110px 1fr; gap: 8px; }
+
+    /* rules */
+    .rules-rows { display: flex; flex-direction: column; gap: 7px; }
+    .rule-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rule-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ef4444;
+      flex-shrink: 0;
+    }
+
+    /* ── Preview Panel ── */
+    .preview-panel {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+    }
+
+    .preview-card {
+      background: var(--preview-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 40px);
+    }
+
+    .preview-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #2d2d2d;
+      border-bottom: 1px solid #3d3d3d;
+    }
+    .preview-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dots { display: flex; gap: 6px; }
+    .dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .preview-label {
+      font-size: 12px;
+      color: #6b7280;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, transform .1s;
+      font-family: inherit;
+    }
+    .copy-btn:hover { background: #5b21b6; }
+    .copy-btn:active { transform: scale(.97); }
+    .copy-btn.copied { background: #059669; }
+
+    .preview-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--preview-text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .preview-body .sec-label { color: var(--preview-section); font-weight: 700; }
+    .preview-body .key-label { color: var(--preview-key); }
+    .preview-body .muted-val { color: #6b7280; font-style: italic; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; padding: 16px; }
+      .preview-panel { position: static; }
+      .preview-card { max-height: 600px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Banner -->
+<div class="banner">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <circle cx="8" cy="8" r="7.5" stroke="#7c3aed"/>
+    <path d="M8 5v3.5M8 10.5v.5" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  Fill in each field with information that reflects your goals, communication style, and project context.
+</div>
+
+<!-- Header -->
+<header>
+  <h1>AI OS Builder</h1>
+  <p>Build your personal context layer — paste it once, and every Claude conversation starts where it should.</p>
+</header>
+
+<!-- Intro -->
+<div class="intro">
+  <div class="intro-body">
+    <h2>The context layer between you and Claude</h2>
+    <p>Most people start every AI conversation from zero. AI OS fixes that.</p>
+    <p>It's a structured prompt built to give Claude persistent context about how you think, what you're working on, and how you want to be challenged — so you don't spend the first 10 messages re-explaining yourself every time you open a new chat.</p>
+    <p>The document maps five layers: identity, communication style, current priorities, daily constraints, and hard rules. Together they function like a system prompt for your own workflow — the difference between Claude giving generic output and Claude operating like a thinking partner who already knows your context.</p>
+    <p><strong>One document. Paste once. Every conversation starts where it should.</strong></p>
+  </div>
+  <div class="intro-tag">AI OS</div>
+</div>
+
+<!-- Layout -->
+<div class="layout">
+
+  <!-- ── Form Panel ── -->
+  <div class="form-panel">
+
+    <!-- 1. Identity -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">1</div>
+        <div class="card-title">Identity</div>
+      </div>
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" placeholder="e.g. Ana Lima" />
+      </div>
+      <div class="field">
+        <label for="business">Your business or company</label>
+        <input type="text" id="business" placeholder="e.g. a digital marketing agency for local small businesses" />
+      </div>
+      <div class="field">
+        <label for="customer">Your ideal customer</label>
+        <input type="text" id="customer" placeholder="e.g. digital entrepreneurs generating $5k–$40k/month" />
+      </div>
+      <div class="field">
+        <label for="role">Your role / how you describe yourself</label>
+        <textarea id="role" rows="2" placeholder="e.g. I'm a strategist who uses AI practically — not a developer"></textarea>
+      </div>
+      <p class="tip">💡 Include your industry, business size, and what sets you apart.</p>
+    </div>
+
+    <!-- 2. Communication Style -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">2</div>
+        <div class="card-title">Communication Style</div>
+      </div>
+
+      <div class="field">
+        <label for="tone">Preferred tone</label>
+        <input type="text" id="tone" placeholder="e.g. direct and objective, no fluff" />
+      </div>
+      <div class="field">
+        <label for="format">Response format preferences</label>
+        <textarea id="format" rows="2" placeholder="e.g. short responses, 300 words max, unless I ask for more"></textarea>
+      </div>
+      <div class="field">
+        <label for="avoid_style">What you do NOT want to see in responses</label>
+        <textarea id="avoid_style" rows="2" placeholder="e.g. don't start with 'Great question!' — get straight to the point"></textarea>
+      </div>
+      <p class="tip">💡 "No fluff" is better than "be objective" — be specific.</p>
+    </div>
+
+    <!-- 3. Goals -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">3</div>
+        <div class="card-title">Goals &amp; Priorities</div>
+      </div>
+
+      <label style="margin-bottom:10px;display:block">Current priorities (up to 5)</label>
+      <div class="priorities">
+        <div class="priority-row"><span class="priority-num">1.</span><input type="text" class="priority" placeholder="e.g. grow YouTube channel for organic leads" /></div>
+        <div class="priority-row"><span class="priority-num">2.</span><input type="text" class="priority" placeholder="e.g. structure high-ticket mentorship offer" /></div>
+        <div class="priority-row"><span class="priority-num">3.</span><input type="text" class="priority" placeholder="e.g. automate client onboarding" /></div>
+        <div class="priority-row"><span class="priority-num">4.</span><input type="text" class="priority" placeholder="e.g. create content that positions me as a systems expert" /></div>
+        <div class="priority-row"><span class="priority-num">5.</span><input type="text" class="priority" placeholder="optional" /></div>
+      </div>
+      <p class="tip">💡 List 3–5 max. More dilutes focus.</p>
+    </div>
+
+    <!-- 4. Routine -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">4</div>
+        <div class="card-title">Routine &amp; Non-negotiables</div>
+      </div>
+
+      <label style="margin-bottom:10px;display:block">Daily routine blocks</label>
+      <div class="routine-rows">
+        <div class="routine-row">
+          <input type="text" class="routine-time" placeholder="7am–9am" />
+          <input type="text" class="routine-act" placeholder="Deep work — strategy, content creation" />
+        </div>
+        <div class="routine-row">
+          <input type="text" class="routine-time" placeholder="9am–11am" />
+          <input type="text" class="routine-act" placeholder="Recordings and content production" />
+        </div>
+        <div class="routine-row">
+          <input type="text" class="routine-time" placeholder="1pm–3pm" />
+          <input type="text" class="routine-act" placeholder="Client calls and community" />
+        </div>
+        <div class="routine-row">
+          <input type="text" class="routine-time" placeholder="4pm–6pm" />
+          <input type="text" class="routine-act" placeholder="Business development and admin" />
+        </div>
+      </div>
+
+      <label style="margin-top:16px;margin-bottom:10px;display:block">Non-negotiable rules</label>
+      <div class="rules-rows">
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="rule" placeholder="e.g. no meetings before 9am" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="rule" placeholder="e.g. I don't work after 7pm" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="rule" placeholder="e.g. Monday is content day, Friday is review" /></div>
+      </div>
+      <p class="tip">💡 Include weekdays reserved for specific activities.</p>
+    </div>
+
+    <!-- 5. What to Avoid -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">5</div>
+        <div class="card-title">What to Avoid</div>
+      </div>
+
+      <label style="margin-bottom:10px;display:block">Always-active prohibitions for Claude</label>
+      <div class="rules-rows">
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="prohibition" placeholder="e.g. don't give generic advice — be specific to my situation" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="prohibition" placeholder="e.g. don't repeat my question before answering" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="prohibition" placeholder="e.g. don't recommend tools I didn't ask about" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="prohibition" placeholder="e.g. don't suggest hiring unless I ask about team" /></div>
+        <div class="rule-row"><span class="rule-tag">✗</span><input type="text" class="prohibition" placeholder="e.g. don't write in a corporate tone" /></div>
+      </div>
+      <p class="tip">💡 Revisit after your first weeks — you'll spot patterns to add here.</p>
+    </div>
+
+  </div><!-- /form-panel -->
+
+  <!-- ── Preview Panel ── -->
+  <div class="preview-panel">
+    <div class="preview-card">
+      <div class="preview-toolbar">
+        <div class="preview-toolbar-left">
+          <div class="dots">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+          <span class="preview-label">ai-os-prompt.txt</span>
+        </div>
+        <button class="copy-btn" id="copyBtn">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          Copy to my AI OS
+        </button>
+      </div>
+      <div class="preview-body" id="preview"></div>
+    </div>
+  </div>
+
+</div><!-- /layout -->
+
+<script>
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+  function val(id) { return ($(id)?.value || '').trim(); }
+  function vals(sel) { return $$(sel).map(el => el.value.trim()); }
+
+  function placeholder(text, fallback) {
+    return text || fallback;
+  }
+
+  function buildPrompt() {
+    const name     = val('#name');
+    const business = val('#business');
+    const customer = val('#customer');
+    const role     = val('#role');
+    const tone     = val('#tone');
+    const format   = val('#format');
+    const avoidSt  = val('#avoid_style');
+
+    const priorities = vals('.priority').filter(Boolean);
+
+    const routineTimes = vals('.routine-time');
+    const routineActs  = vals('.routine-act');
+    const routineRows  = routineTimes
+      .map((t, i) => t && routineActs[i] ? `  ${t}: ${routineActs[i]}` : null)
+      .filter(Boolean);
+
+    const rules       = vals('.rule').filter(Boolean);
+    const prohibitions = vals('.prohibition').filter(Boolean);
+
+    const empty = (v, fb) => v || fb;
+
+    const lines = [];
+
+    lines.push('## 1. IDENTITY');
+    lines.push('');
+    lines.push(`Name: ${empty(name, '[your name]')}`);
+    lines.push(`Business / Company: ${empty(business, '[your business or company]')}`);
+    lines.push(`Ideal Customer: ${empty(customer, '[your ideal customer]')}`);
+    lines.push(`Role: ${empty(role, '[how you describe yourself]')}`);
+    lines.push('');
+
+    lines.push('---');
+    lines.push('');
+    lines.push('## 2. COMMUNICATION STYLE');
+    lines.push('');
+    lines.push(`Preferred Tone: ${empty(tone, '[your preferred tone]')}`);
+    if (format) lines.push(`Format Preferences: ${format}`);
+    if (avoidSt) lines.push(`Do NOT do: ${avoidSt}`);
+    lines.push('');
+
+    lines.push('---');
+    lines.push('');
+    lines.push('## 3. GOALS & PRIORITIES');
+    lines.push('');
+    if (priorities.length) {
+      priorities.forEach((p, i) => lines.push(`${i + 1}. ${p}`));
+    } else {
+      lines.push('1. [your first priority]');
+      lines.push('2. [your second priority]');
+    }
+    lines.push('');
+
+    lines.push('---');
+    lines.push('');
+    lines.push('## 4. ROUTINE & NON-NEGOTIABLES');
+    lines.push('');
+    if (routineRows.length) {
+      lines.push('Daily Schedule:');
+      routineRows.forEach(r => lines.push(r));
+    } else {
+      lines.push('Daily Schedule:');
+      lines.push('  [add your time blocks]');
+    }
+    lines.push('');
+    if (rules.length) {
+      lines.push('Non-negotiable Rules:');
+      rules.forEach(r => lines.push(`  ✗ ${r}`));
+    }
+    lines.push('');
+
+    lines.push('---');
+    lines.push('');
+    lines.push('## 5. WHAT TO AVOID');
+    lines.push('');
+    if (prohibitions.length) {
+      prohibitions.forEach(p => lines.push(`  ✗ ${p}`));
+    } else {
+      lines.push('  ✗ [your prohibitions]');
+    }
+    lines.push('');
+    lines.push('---');
+    lines.push('');
+    lines.push('> Remember: update this document whenever your goals or routine change.');
+    lines.push('> The more current your AI OS, the more useful Claude will be for you.');
+
+    return lines.join('\n');
+  }
+
+  // ── Syntax-colored preview ──
+  function colorize(text) {
+    return text
+      .split('\n')
+      .map(line => {
+        // Section headers
+        if (/^## \d+\./.test(line)) {
+          return `<span class="sec-label">${esc(line)}</span>`;
+        }
+        // Keys (word(s) followed by colon)
+        if (/^[A-Za-z &\/]+:/.test(line)) {
+          const colon = line.indexOf(':');
+          const key   = line.slice(0, colon + 1);
+          const rest  = line.slice(colon + 1);
+          return `<span class="key-label">${esc(key)}</span>${esc(rest)}`;
+        }
+        // Placeholder lines
+        if (/\[.+\]/.test(line)) {
+          return `<span class="muted-val">${esc(line)}</span>`;
+        }
+        return esc(line);
+      })
+      .join('\n');
+  }
+
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function render() {
+    const text = buildPrompt();
+    $('#preview').innerHTML = colorize(text);
+  }
+
+  // ── Copy ──
+  $('#copyBtn').addEventListener('click', async () => {
+    const text = buildPrompt();
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    const btn = $('#copyBtn');
+    btn.classList.add('copied');
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3.5 3.5L11 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Copied!`;
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="4" y="4" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2.5 9H2a1 1 0 01-1-1V2a1 1 0 011-1h6a1 1 0 011 1v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Copy to my AI OS`;
+    }, 2000);
+  });
+
+  // ── Live update ──
+  document.querySelector('.form-panel').addEventListener('input', render);
+
+  render();
+</script>
+</body>
+</html>

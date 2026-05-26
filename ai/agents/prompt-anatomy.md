@@ -1,8 +1,31 @@
-# Anatomy of a Complete Prompt
+# MCP
 
-A good prompt is not just an instruction — it is a structured document that tells the agent who it is, what it knows, how to act, and what to deliver.
+is a way to put my worflow AI workflow in a very simple way
+just a way to give a context for a application that use LLM
 
-Every well-built prompt has **6 blocks**. The structure is the same for any agent type. What changes is the content inside each block.
+Can be: tools, raw context
+
+
+MCP standardazed the data take and actually give to the model
+
+it's a protocol that is defining and standardzed some internal data sourcea
+
+take the data --> and give to the model
+
+Basically three main things:
+
+it's tool, set , called resources which is raw data that you could like ingest into a RAG pipeline or whatever you wan it and prompts
+
+tools: actions the model can take out in the world
+resources: could be files, texts, data
+prompts: prompt templates - slash command
+
+standardation layer - add context 
+
+Integration Protocol - open source 
+
+just whip out claude code just write a ode like an mcp server
+
 
 ---
 
