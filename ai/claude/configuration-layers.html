@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configuration Layers — Learn About Product</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f9fa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --accent: #7c3aed;
+  --accent-light: #ede9fe;
+  --accent-dark: #5b21b6;
+  --text: #111827;
+  --text2: #374151;
+  --muted: #6b7280;
+  --muted2: #9ca3af;
+  --radius: 10px;
+  --mono: "SF Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Banner ── */
+.banner {
+  background: var(--accent-light);
+  border-bottom: 1px solid #c4b5fd;
+  padding: 11px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  font-weight: 500;
+}
+.banner-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ── Header ── */
+header {
+  padding: 28px 32px 0;
+}
+header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+header p {
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ── Content ── */
+.content {
+  padding: 24px 32px 56px;
+  max-width: 1100px;
+}
+
+/* ── Section label ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted2);
+  margin-bottom: 12px;
+  margin-top: 28px;
+}
+
+/* ── Two-column layout ── */
+.tree-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+.tree-layout .tree-card {
+  flex: 0 0 260px;
+  margin-top: 0;
+}
+.tree-layout .detail-panel {
+  flex: 1 1 0;
+  min-width: 0;
+  position: sticky;
+  top: 16px;
+  margin-top: 0;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 680px) {
+  .tree-layout { flex-direction: column; gap: 12px; }
+  .tree-layout .tree-card { flex: none; width: 100%; }
+  .tree-layout .detail-panel {
+    position: static;
+    flex: none;
+    width: 100%;
+    min-height: unset;
+  }
+}
+
+/* ── Tree card ── */
+.tree-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+}
+.tree-root {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted2);
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+/* ── Layer rows ── */
+.layer-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 10px;
+  margin: 2px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  border: 1px solid transparent;
+}
+.layer-row:hover { background: #f3f4f6; }
+.layer-row.active { /* background + border set inline via JS per layer color */ }
+
+.layer-num {
+  width: 22px; height: 22px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  margin-top: 1px;
+}
+
+/* two-line row body */
+.layer-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.layer-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.layer-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.layer-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.layer-row.active .layer-name { color: var(--text); font-weight: 700; }
+
+.layer-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.layer-badge {
+  font-size: 9.5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.layer-cost {
+  font-size: 10.5px;
+  color: var(--muted2);
+  font-family: var(--mono);
+}
+
+/* ── Detail panel ── */
+.detail-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: border-color 0.25s, background 0.25s;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.detail-panel.animated { animation: fadeSlide 0.2s ease both; }
+
+.detail-empty {
+  font-size: 13px;
+  color: var(--muted2);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  flex: 1;
+  padding: 32px 20px;
+}
+.detail-empty-icon {
+  font-size: 32px;
+  opacity: .35;
+  line-height: 1;
+}
+
+/* header row: icon + name + tags */
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 1px;
+}
+.detail-meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.detail-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+.detail-tags { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.detail-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* body content */
+.detail-desc {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.detail-where {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+}
+.detail-where-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted2);
+  flex-shrink: 0;
+}
+.detail-where-val {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  word-break: break-all;
+}
+.detail-items-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted2);
+  margin-bottom: 8px;
+}
+.detail-items {
+  list-style: none;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.detail-items li {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  padding: 8px 12px 8px 28px;
+  position: relative;
+  border-bottom: 1px solid #f3f4f6;
+}
+.detail-items li:last-child { border-bottom: none; }
+.detail-items li:nth-child(odd) { background: #fafafa; }
+.detail-items li::before {
+  content: "–";
+  position: absolute;
+  left: 12px;
+  color: var(--muted2);
+}
+.detail-tip {
+  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 3px solid;
+  line-height: 1.65;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.detail-tip strong { font-weight: 700; }
+
+/* ── Below-fold cards ── */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.info-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* token table */
+.token-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.token-table th {
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted2);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.token-table td {
+  padding: 7px 8px;
+  color: var(--text2);
+  border-bottom: 1px solid #f3f4f6;
+  vertical-align: top;
+}
+.token-table tr:last-child td { border-bottom: none; }
+.token-table .layer-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+.cost-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* file tree block */
+.file-tree-block {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #d4d4d4;
+  overflow-x: auto;
+  white-space: pre;
+}
+.ft-comment { color: #6b7280; }
+.ft-dir     { color: #a78bfa; }
+.ft-file    { color: #86efac; }
+.ft-arrow   { color: #9ca3af; }
+
+/* two-col info layout */
+.info-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+@media (max-width: 620px) { .info-two-col { grid-template-columns: 1fr; } }
+
+/* best-practice list */
+.bp-list { list-style: none; }
+.bp-list li {
+  font-size: 12.5px;
+  color: var(--text2);
+  line-height: 1.55;
+  padding: 5px 0 5px 18px;
+  position: relative;
+  border-bottom: 1px solid #f3f4f6;
+}
+.bp-list li:last-child { border-bottom: none; }
+.bp-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #059669;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* rule compare */
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.compare-bad {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 3px solid #dc2626;
+}
+.compare-good {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 3px solid #059669;
+}
+.compare-row span { font-size: 10px; font-weight: 700; display: block; margin-bottom: 4px; opacity: .7; text-transform: uppercase; letter-spacing: .04em; }
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  header, .content { padding-left: 20px; padding-right: 20px; }
+  .banner { padding-left: 20px; padding-right: 20px; }
+  .compare-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-dot"></div>
+  Claude Code · Memory &amp; Context Management
+</div>
+
+<header>
+  <h1>Configuration Layers</h1>
+  <p>Claude Code reads context from four stacked layers. Click each one to understand what it does, where to set it up, and how it affects token usage.</p>
+</header>
+
+<div class="content">
+
+  <div class="section-label">Layers</div>
+  <div class="tree-layout">
+
+    <div class="tree-card">
+      <div class="tree-root">Claude Code</div>
+      <div id="layerTree"></div>
+    </div>
+
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-empty">Click any layer above to see a detailed explanation of what it does, where to configure it, and what to include.</div>
+    </div>
+
+  </div>
+
+  <!-- Token cost reference -->
+  <div class="section-label">Token cost by layer</div>
+  <div class="info-card" style="margin-top:4px">
+    <table class="token-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Scope</th>
+          <th>When loaded</th>
+          <th>Token cost</th>
+        </tr>
+      </thead>
+      <tbody id="tokenTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- File tree + best practices -->
+  <div class="section-label">Where files live</div>
+  <div class="info-two-col">
+    <div class="info-card">
+      <div class="info-card-title">📂 Global layer</div>
+      <div class="file-tree-block"><span class="ft-dir">~/.claude/</span>
+<span class="ft-arrow">├──</span> <span class="ft-file">settings.json</span>     <span class="ft-comment">← Layer 1: Global rules</span>
+<span class="ft-arrow">└──</span> <span class="ft-dir">projects/</span>
+    <span class="ft-arrow">└──</span> <span class="ft-dir">your-project/</span>
+        <span class="ft-arrow">└──</span> <span class="ft-dir">memory/</span>
+            <span class="ft-arrow">├──</span> <span class="ft-file">MEMORY.md</span>     <span class="ft-comment">← index</span>
+            <span class="ft-arrow">└──</span> <span class="ft-file">feedback_*.md</span> <span class="ft-comment">← memory files</span></div>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">📁 Project layer</div>
+      <div class="file-tree-block"><span class="ft-dir">your-project/</span>
+<span class="ft-arrow">├──</span> <span class="ft-file">CLAUDE.md</span>        <span class="ft-comment">← Layer 3: Full manual</span>
+<span class="ft-arrow">├──</span> <span class="ft-dir">.claude/</span>
+<span class="ft-arrow">│   └──</span> <span class="ft-file">settings.json</span>  <span class="ft-comment">← Layer 2: Project rules</span>
+<span class="ft-arrow">├──</span> <span class="ft-dir">skills/</span>
+<span class="ft-arrow">│   └──</span> <span class="ft-dir">doc-transformer/</span>
+<span class="ft-arrow">│       └──</span> <span class="ft-file">SKILL.md</span>
+<span class="ft-arrow">├──</span> <span class="ft-dir">inputs/</span>          <span class="ft-comment">← Claude reads, never writes</span>
+<span class="ft-arrow">└──</span> <span class="ft-dir">outputs/</span>         <span class="ft-comment">← Claude writes here</span></div>
+    </div>
+  </div>
+
+  <!-- Best practices + token rules -->
+  <div class="section-label">Writing lean instructions</div>
+  <div class="info-two-col">
+    <div class="info-card">
+      <div class="info-card-title">✓ Best practices</div>
+      <ul class="bp-list">
+        <li>One purpose per folder — never mix inputs with outputs</li>
+        <li>Always save outputs to the correct subfolder, never to the root</li>
+        <li>Use lowercase and hyphens, no spaces in file names</li>
+        <li>Never overwrite input files</li>
+        <li>Keep Global rules universal — project-specific rules go in Layer 2 or 3</li>
+        <li>Skip long explanations of <em>why</em> in .md files — just the rule</li>
+        <li>If a rule only applies to one task, put it in the message, not CLAUDE.md</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <div class="info-card-title">⚡ Token-efficient rules</div>
+      <div class="compare-row">
+        <div class="compare-bad"><span>❌ Too verbose</span>"When the user gives you a document to transform, please make sure you always check what format they want before starting..."</div>
+        <div class="compare-good"><span>✅ Efficient</span>"If format is not specified, ask: 'Which format? thread / post / summary / pdf / slides'"</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;">Every line in your .md files is loaded into Claude's context. Write like you're paying per word — because you are.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const LAYERS = [
+  {
+    id: "global",
+    name: "Layer 1 — Global",
+    icon: "🌐",
+    color: "#0891b2",
+    bg: "#e0f2fe",
+    border: "#7dd3fc",
+    badge: "Always active",
+    cost: "Very low",
+    scope: "All projects",
+    brief: "Universal rules for every project",
+    desc: "Rules that apply to every project and every session, not just the current one. These are universal behavioral instructions — Claude reads them before starting any work, across every project you ever open.",
+    where: "Desktop → Settings → Cowork → Edit",
+    itemsLabel: "Typical rules to set here",
+    items: [
+      "Always answer in English",
+      "Don't narrate what you're about to do — just execute",
+      "After delivering a file, write only one summary sentence",
+      "Read files in a single pass — never re-read the same file",
+      "Don't ask for confirmation before executing a clear instruction"
+    ],
+    tip: "Without these rules, Claude defaults to verbose behavior. Each unnecessary narration or re-read costs 100–400 extra tokens per message — that adds up fast."
+  },
+  {
+    id: "project",
+    name: "Layer 2 — Project",
+    icon: "📂",
+    color: "#2563eb",
+    bg: "#dbeafe",
+    border: "#93c5fd",
+    badge: "Every task",
+    cost: "Low",
+    scope: "Current project",
+    brief: "Strategic briefing loaded on every task",
+    desc: "Rules specific to a single project. The strategic briefing loaded at the start of every task — not the full manual. More specific than global rules: it defines the project's goals, constraints, conventions, and what to avoid in this context.",
+    where: "Side panel → Projects → + → Instructions field",
+    itemsLabel: "What to include",
+    items: [
+      "Project objective and output formats",
+      "Skill location: skills/doc-transformer/SKILL.md",
+      "Input folder: inputs/ (Claude reads only)",
+      "Output folder: outputs/ with pattern [type]-[topic].[ext]",
+      "Delivery rule: after output, ask only 'Want another format?'"
+    ],
+    tip: "Without Project Instructions, Claude reads the entire CLAUDE.md on every new session — burning tokens needlessly. A tight Instructions field prevents that."
+  },
+  {
+    id: "claude_md",
+    name: "Layer 3 — CLAUDE.md",
+    icon: "🧠",
+    color: "#7c3aed",
+    bg: "#ede9fe",
+    border: "#c4b5fd",
+    badge: "On demand",
+    cost: "Medium",
+    scope: "Current project",
+    brief: "Complete execution manual, loaded when needed",
+    desc: "The complete execution manual for the project. Claude consults it only when it needs more detail — not on every message. It lives at the root of your project folder and is the most detailed layer.",
+    where: "your-project/CLAUDE.md  (repo root)",
+    itemsLabel: "What it should contain",
+    items: [
+      "Detailed token economy rules",
+      "Standard workflow steps (numbered)",
+      "File naming conventions",
+      "Available skills and when to use each",
+      "Tone, style guidelines, and what NOT to do"
+    ],
+    tip: "Project Instructions = strategic summary. CLAUDE.md = complete manual. Cowork always loads Project Instructions — and reads CLAUDE.md only when it needs details."
+  },
+  {
+    id: "memory",
+    name: "Memory",
+    icon: "💾",
+    color: "#d97706",
+    bg: "#fef3c7",
+    border: "#fcd34d",
+    badge: "Across sessions",
+    cost: "Very low",
+    scope: "Current project",
+    brief: "What Claude builds from your conversations",
+    desc: "Not a configuration layer you write manually — it's what Claude builds over time from your conversations. Remembers preferences, feedback, and project context so you don't have to re-explain in every session.",
+    where: "~/.claude/projects/your-project/memory/",
+    itemsLabel: "What gets stored",
+    items: [
+      "User preferences and workflow habits",
+      "Feedback you've given Claude about its output",
+      "Project context that isn't visible in the code",
+      "Decisions and agreed conventions from past sessions",
+      "Non-obvious facts that would surprise a new collaborator"
+    ],
+    tip: "Only store what's non-obvious and not derivable from the code. Memory files are written automatically — you don't manage them manually. If it's in a git commit or the code itself, it shouldn't be in memory."
+  }
+];
+
+let activeLayer = null;
+
+const LAYER_NUMS = { global: '1', project: '2', claude_md: '3', memory: '✦' };
+
+function buildTree() {
+  const el = document.getElementById('layerTree');
+  el.innerHTML = LAYERS.map(l => `
+    <div class="layer-row" id="row-${l.id}" onclick="selectLayer('${l.id}')">
+      <div class="layer-num" style="background:${l.bg};color:${l.color};border-color:${l.border}">
+        ${LAYER_NUMS[l.id] || '?'}
+      </div>
+      <div class="layer-body">
+        <div class="layer-title">
+          <span class="layer-icon">${l.icon}</span>
+          <span class="layer-name">${l.name}</span>
+        </div>
+        <div class="layer-meta">
+          <span class="layer-badge" style="background:${l.bg};color:${l.color};border-color:${l.border}">${l.badge}</span>
+          <span class="layer-cost">↯ ${l.cost}</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function buildTokenTable() {
+  const body = document.getElementById('tokenTableBody');
+  const costColors = {
+    'Very low': { bg: '#d1fae5', color: '#065f46' },
+    'Low':      { bg: '#dbeafe', color: '#1e40af' },
+    'Medium':   { bg: '#fef3c7', color: '#92400e' }
+  };
+  body.innerHTML = LAYERS.map(l => {
+    const c = costColors[l.cost] || { bg: '#f3f4f6', color: '#6b7280' };
+    return `<tr>
+      <td>
+        <span class="layer-dot" style="background:${l.color}"></span>
+        <strong style="color:${l.color}">${l.name}</strong>
+      </td>
+      <td>${l.scope}</td>
+      <td>${l.badge}</td>
+      <td><span class="cost-pill" style="background:${c.bg};color:${c.color}">${l.cost}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function selectLayer(id) {
+  activeLayer = activeLayer === id ? null : id;
+  document.querySelectorAll('.layer-row').forEach(r => {
+    const isActive = r.id === 'row-' + activeLayer;
+    r.classList.toggle('active', isActive);
+    if (isActive) {
+      const l = LAYERS.find(x => 'row-' + x.id === r.id);
+      r.style.background = l.bg;
+      r.style.borderColor = l.border;
+    } else {
+      r.style.background = '';
+      r.style.borderColor = '';
+    }
+  });
+  renderDetail();
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+
+  panel.classList.remove('animated');
+  void panel.offsetWidth;
+
+  if (!activeLayer) {
+    panel.style.borderColor = '#e5e7eb';
+    panel.style.background = '#ffffff';
+    panel.innerHTML = `<div class="detail-empty">
+      <div class="detail-empty-icon">⚙️</div>
+      <span>Click any layer to see what it does, where to configure it, and what to include.</span>
+    </div>`;
+    return;
+  }
+
+  const l = LAYERS.find(x => x.id === activeLayer);
+
+  panel.style.borderColor = l.border;
+  panel.style.background = `linear-gradient(135deg, ${l.bg}70, #ffffff)`;
+  panel.classList.add('animated');
+  panel.innerHTML = `
+    <div class="detail-header">
+      <span class="detail-icon">${l.icon}</span>
+      <div class="detail-meta">
+        <span class="detail-name" style="color:${l.color}">${l.name}</span>
+        <div class="detail-tags">
+          <span class="detail-badge" style="background:${l.bg};color:${l.color};border-color:${l.border}">${l.badge}</span>
+          <span class="detail-cost">↯ ${l.cost}</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-desc">${l.desc}</div>
+    <div class="detail-where">
+      <span class="detail-where-label">Where:</span>
+      <span class="detail-where-val" style="background:${l.bg};color:${l.color};border-color:${l.border}">${l.where}</span>
+    </div>
+    <div class="detail-items-label">${l.itemsLabel}</div>
+    <ul class="detail-items">
+      ${l.items.map(i => `<li>${i}</li>`).join('')}
+    </ul>
+    <div class="detail-tip" style="border-color:${l.color};background:${l.bg};color:${l.color}">
+      <span>💡</span>
+      <span><strong>Key insight:</strong> ${l.tip}</span>
+    </div>`;
+}
+
+buildTree();
+buildTokenTable();
+</script>
+</body>
+</html>

@@ -542,10 +542,12 @@
             <div class="nav-item" onclick="showPage('n8n')" data-page="n8n">N8N Workflow</div>
             <div class="nav-sub-title">Claude</div>
             <div class="nav-item" onclick="showPage('claude-building-blocks')" data-page="claude-building-blocks">Claude Building Blocks</div>
-            <div class="nav-item" onclick="showPage('building-projects')" data-page="building-projects">Configuration Layers</div>
+            <div class="nav-item" onclick="showPage('project-layer')" data-page="project-layer">AI Across the Product Lifecycle</div>
+            <div class="nav-item" onclick="showHtmlPage('building-projects')" data-page="building-projects">Configuration Layers</div>
             <div class="nav-item" onclick="showPage('prompt-injection')" data-page="prompt-injection">Prompt Injection</div>
             <div class="nav-item" onclick="showPage('claude-commands')" data-page="claude-commands">Claude Commands</div>
             <div class="nav-item" onclick="showHtmlPage('ai-os-builder')" data-page="ai-os-builder">AI OS Builder</div>
+            <div class="nav-item" onclick="showHtmlPage('project-structure')" data-page="project-structure">Project Folder Structure</div>
         </div>
 
         <div class="nav-section">
@@ -659,7 +661,7 @@
             'ai-tools-end-to-end':      'ai/tools-and-workflows/ai-tools-end-to-end.md',
             'n8n':                      'ai/tools-and-workflows/N8N.md',
             'claude-building-blocks':   'ai/claude/claude-building-blocks.md',
-            'building-projects':        'ai/claude/configuration_layer.md',
+            'project-layer':            'ai/claude/project_layer.md',
             'prompt-injection':         'ai/claude/prompt_injection.md',
             'claude-commands':          'ai/claude/commands.md',
             'what-is-an-api':           'technical/what-is-an-api.md',
@@ -680,7 +682,9 @@
         }
 
         var htmlPages = {
-            'ai-os-builder': 'ai/claude/ai-os-builder.html'
+            'ai-os-builder': 'ai/claude/ai-os-builder.html',
+            'project-structure': 'ai/claude/project-structure.html',
+            'building-projects': 'ai/claude/configuration-layers.html'
         };
 
         function showHome() {
@@ -693,6 +697,12 @@
             if (window.innerWidth <= 768) closeSidebar();
         }
 
+        var htmlPageTitles = {
+            'ai-os-builder': 'AI OS Builder',
+            'project-structure': 'Project Folder Structure',
+            'building-projects': 'Configuration Layers'
+        };
+
         function showHtmlPage(pageKey) {
             if (!htmlPages[pageKey]) return;
             currentPage = pageKey;
@@ -701,7 +711,7 @@
             var iframe = document.getElementById('contentIframe');
             iframe.src = htmlPages[pageKey];
             iframe.style.display = 'block';
-            document.getElementById('pageTitle').textContent = 'AI OS Builder';
+            document.getElementById('pageTitle').textContent = htmlPageTitles[pageKey] || pageKey;
             updateActiveNav(pageKey);
             if (window.innerWidth <= 768) closeSidebar();
         }

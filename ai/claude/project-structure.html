@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Folder Structure — Learn About Product</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f9fa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --accent: #7c3aed;
+  --accent-light: #ede9fe;
+  --accent-dark: #5b21b6;
+  --text: #111827;
+  --text2: #374151;
+  --muted: #6b7280;
+  --muted2: #9ca3af;
+  --radius: 10px;
+  --mono: "SF Mono", "Fira Code", "Cascadia Code", ui-monospace, monospace;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --cat-memory: #7c3aed;
+  --cat-memory-bg: #ede9fe;
+  --cat-memory-border: #c4b5fd;
+  --cat-planning: #d97706;
+  --cat-planning-bg: #fef3c7;
+  --cat-planning-border: #fcd34d;
+  --cat-docs: #059669;
+  --cat-docs-bg: #d1fae5;
+  --cat-docs-border: #6ee7b7;
+  --cat-security: #dc2626;
+  --cat-security-bg: #fee2e2;
+  --cat-security-border: #fca5a5;
+  --cat-config: #0891b2;
+  --cat-config-bg: #e0f2fe;
+  --cat-config-border: #7dd3fc;
+  --cat-example: #2563eb;
+  --cat-example-bg: #dbeafe;
+  --cat-example-border: #93c5fd;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Banner ── */
+.banner {
+  background: var(--accent-light);
+  border-bottom: 1px solid var(--cat-memory-border);
+  padding: 11px 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--accent-dark);
+  font-weight: 500;
+}
+.banner-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ── Header ── */
+header {
+  padding: 28px 32px 0;
+  max-width: 900px;
+}
+header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+header p {
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+/* ── Content ── */
+.content {
+  padding: 24px 32px 56px;
+  max-width: 1100px;
+}
+
+/* ── Two-column layout ── */
+.tree-layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+.tree-layout .tree-card {
+  flex: 1 1 340px;
+  min-width: 0;
+  margin-top: 0;
+}
+.tree-layout .detail-panel {
+  flex: 0 0 300px;
+  width: 300px;
+  position: sticky;
+  top: 16px;
+  margin-top: 0;
+}
+
+@media (max-width: 720px) {
+  .tree-layout {
+    flex-direction: column;
+  }
+  .tree-layout .detail-panel {
+    position: static;
+    width: 100%;
+    flex: none;
+  }
+}
+
+/* ── Section label ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted2);
+  margin-bottom: 12px;
+  margin-top: 28px;
+}
+
+/* ── Category pills ── */
+.cat-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 4px;
+}
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.2s, transform 0.15s;
+  user-select: none;
+}
+.cat-pill:hover { transform: translateY(-1px); }
+.cat-pill .cat-dot {
+  width: 7px; height: 7px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Tree card ── */
+.tree-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  margin-top: 4px;
+}
+.tree-root {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 4px;
+}
+.tree-root::before { content: "📁"; font-size: 15px; }
+
+/* ── File rows ── */
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  margin: 2px 0;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  border: 1px solid transparent;
+  position: relative;
+}
+.file-row:hover { background: #f3f4f6; }
+.file-row.active {
+  background: var(--accent-light);
+  border-color: var(--cat-memory-border);
+}
+.file-row.indent-1 { margin-left: 24px; }
+.file-row.indent-2 { margin-left: 48px; }
+
+.file-icon { font-size: 14px; flex-shrink: 0; }
+.file-name {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text2);
+  flex-shrink: 0;
+}
+.file-row.active .file-name { color: var(--accent-dark); font-weight: 600; }
+.file-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+.file-brief {
+  font-size: 12px;
+  color: var(--muted2);
+  margin-left: auto;
+  text-align: right;
+  line-height: 1.3;
+  display: none;
+}
+
+/* indent guides */
+.file-row.indent-1::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.file-row.indent-2::before {
+  content: "";
+  position: absolute;
+  left: 35px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+/* ── Detail panel ── */
+.detail-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  transition: border-color 0.25s, background 0.25s;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.detail-panel.animated { animation: fadeSlide 0.2s ease both; }
+.detail-empty {
+  font-size: 13.5px;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.detail-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+.detail-meta { display: flex; flex-direction: column; gap: 4px; }
+.detail-name {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  width: fit-content;
+}
+.detail-desc {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+.detail-tip {
+  font-size: 12.5px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  border-left: 3px solid;
+  line-height: 1.65;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.detail-tip strong { font-weight: 700; }
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  header, .content { padding-left: 20px; padding-right: 20px; }
+  .banner { padding-left: 20px; padding-right: 20px; }
+  .file-row.indent-1 { margin-left: 14px; }
+  .file-row.indent-2 { margin-left: 28px; }
+  .tree-layout { gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="banner-dot"></div>
+  Claude Code · AI-Powered Projects
+</div>
+
+<header>
+  <h1>Project Folder Structure</h1>
+  <p>Organize your code projects with the right files in the right places. Click any file to understand its role in the project.</p>
+</header>
+
+<div class="content">
+  <div class="section-label">File categories</div>
+  <div class="cat-legend" id="catLegend"></div>
+
+  <div class="section-label">Project tree</div>
+  <div class="tree-layout">
+    <div class="tree-card">
+      <div class="tree-root">my-project/</div>
+      <div id="fileTree"></div>
+    </div>
+
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-empty">Click any file or folder above to see a detailed explanation of its role in the project.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CAT = {
+  memory:   { label: "Memory",        color: "#7c3aed", bg: "#ede9fe",  border: "#c4b5fd" },
+  planning: { label: "Planning",      color: "#d97706", bg: "#fef3c7",  border: "#fcd34d" },
+  docs:     { label: "Documentation", color: "#059669", bg: "#d1fae5",  border: "#6ee7b7" },
+  security: { label: "Security",      color: "#dc2626", bg: "#fee2e2",  border: "#fca5a5" },
+  config:   { label: "Configuration", color: "#0891b2", bg: "#e0f2fe",  border: "#7dd3fc" },
+  example:  { label: "Example",       color: "#2563eb", bg: "#dbeafe",  border: "#93c5fd" }
+};
+
+const FILES = [
+  {
+    id: "claude_md", name: "CLAUDE.md", icon: "🧠", cat: "memory", indent: 1,
+    brief: "Project instructions & context",
+    desc: "The most important file for anyone using Claude Code. It's the project's persistent memory — it contains instructions, rules, code standards, and context that Claude reads automatically before starting any work. Think of it as a permanent briefing document.",
+    tip: "Include: your tech stack, coding conventions, folder structure, useful commands, and any rules Claude should always follow."
+  },
+  {
+    id: "spec_md", name: "spec.md", icon: "📋", cat: "planning", indent: 1,
+    brief: "What will be built and for whom",
+    desc: "The product specification document (PRD). Defines what the project does, who it's for, what problems it solves, and what's in scope. This is the north star of the project — the whole team (and Claude) should consult it before making decisions.",
+    tip: "Keep it updated as scope evolves. An outdated spec.md is worse than having none at all."
+  },
+  {
+    id: "roadmap_md", name: "roadmap.md", icon: "🗺️", cat: "planning", indent: 1,
+    brief: "Phases and execution order",
+    desc: "The project execution plan. Lists the phases, milestones, and the order in which features should be implemented. Helps maintain focus and prevents scope creep from derailing the project.",
+    tip: "Break it into clear phases (MVP, v1, v2) with concrete deliverables for each one."
+  },
+  {
+    id: "readme_md", name: "README.md", icon: "📖", cat: "docs", indent: 1,
+    brief: "Introduction for anyone opening the repo",
+    desc: "The front door of your project. It's the first file anyone sees when they access your repository on GitHub. Should explain what the project does, how to install it, and how to use it.",
+    tip: "Include: description, requirements, installation steps, how to run it, and screenshots if possible."
+  },
+  {
+    id: "changelog_md", name: "CHANGELOG.md", icon: "📝", cat: "docs", indent: 1,
+    brief: "History of changes per version",
+    desc: "An organized record of all significant changes to the project, grouped by version. Helps both the team and users understand what changed between releases.",
+    tip: "Use the Keep a Changelog format: Added, Changed, Fixed, Removed for each version."
+  },
+  {
+    id: "gitignore", name: ".gitignore", icon: "🚫", cat: "security", indent: 1,
+    brief: "Files Git should never track",
+    desc: "A list of files and folders that Git should not track or push to the remote repository. Essential for preventing passwords, local configurations, and large files from ending up on GitHub.",
+    tip: "Always include: node_modules/, .env, .DS_Store, dist/, and any file containing credentials."
+  },
+  {
+    id: "env", name: ".env", icon: "🔐", cat: "security", indent: 1,
+    brief: "API keys and secrets — never pushed to GitHub",
+    desc: "The environment variables file. Stores API keys, database passwords, tokens, and any sensitive information. Should NEVER be committed — it must be listed in .gitignore.",
+    tip: "Create a .env.example with the variable names but no values, so other developers know what to configure."
+  },
+  {
+    id: "claude_dir", name: ".claude/", icon: "📂", cat: "config", indent: 1,
+    brief: "Claude Code project settings",
+    desc: "The folder containing project-specific Claude Code settings. Stores preferences, permissions, and the behavior configuration for the tool.",
+    tip: "This folder is generated automatically by Claude Code. Don't edit it manually unless you know what you're doing."
+  },
+  {
+    id: "settings_json", name: "settings.json", icon: "⚙️", cat: "config", indent: 2,
+    brief: "Permissions & behavior — shared with the team",
+    desc: "Global Claude Code settings for the project. Defines which commands Claude can run (permissions) and default behaviors. This file is shared with the team via Git.",
+    tip: "Use it to define which tools Claude is allowed to use and which restrictions apply across the project."
+  },
+  {
+    id: "settings_local", name: "settings.local.json", icon: "⚙️", cat: "config", indent: 2,
+    brief: "Personal preferences — stays on your machine",
+    desc: "Your personal Claude Code preferences. Unlike settings.json, this file does NOT go to Git — these are adjustments that only make sense for you (local paths, output preferences, etc.).",
+    tip: "Add it to .gitignore to make sure it's never accidentally shared with the team."
+  },
+  {
+    id: "mcp_json", name: ".mcp.json", icon: "🔌", cat: "config", indent: 1,
+    brief: "Integrations: GitHub, Supabase, Notion, etc.",
+    desc: "The Model Context Protocol (MCP) configuration file. Defines which external services Claude Code can access — such as GitHub, databases, APIs, Notion, Supabase, and others.",
+    tip: "Each integration is an 'MCP server'. Only configure the ones your project actually uses."
+  },
+  {
+    id: "skills_dir", name: "skills/", icon: "🎯", cat: "config", indent: 1,
+    brief: "Reusable automations",
+    desc: "A folder for storing custom skills — sets of instructions that Claude Code can load on demand to perform specific tasks in a standardized way.",
+    tip: "Create skills for repetitive tasks: generating components, writing tests, deploying, setting up environments, etc."
+  },
+  {
+    id: "skill_example", name: "create-component.md", icon: "📄", cat: "example", indent: 2,
+    brief: "Instruction you call with /create-component",
+    desc: "An example of a reusable skill. It's a Markdown file with detailed instructions that Claude follows when you invoke the command. Works like an automation template.",
+    tip: "A good skill includes: context, expected inputs, output format, and examples of the expected result."
+  },
+  {
+    id: "src_dir", name: "src/", icon: "📁", cat: "docs", indent: 1,
+    brief: "Project source code",
+    desc: "The main folder where all the application source code lives. The internal structure varies by framework (pages/, components/, lib/, etc.), but the important thing is keeping it organized and predictable.",
+    tip: "Keep a consistent structure. If someone new joins the project, they should find things without having to ask."
+  }
+];
+
+let activeFile = null;
+let activeCategory = null;
+
+function buildLegend() {
+  const el = document.getElementById('catLegend');
+  el.innerHTML = Object.entries(CAT).map(([k, c]) => `
+    <div class="cat-pill" id="pill-${k}" onclick="filterCategory('${k}')"
+      style="background:${c.bg};color:${c.color};border-color:${c.border}">
+      <div class="cat-dot" style="background:${c.color}"></div>${c.label}
+    </div>`).join('');
+}
+
+function buildTree() {
+  const el = document.getElementById('fileTree');
+  el.innerHTML = FILES.map(f => {
+    const c = CAT[f.cat];
+    return `<div class="file-row indent-${f.indent}" id="row-${f.id}" data-cat="${f.cat}" onclick="selectFile('${f.id}')">
+      <span class="file-icon">${f.icon}</span>
+      <span class="file-name">${f.name}</span>
+      <span class="file-badge" style="background:${c.bg};color:${c.color};border-color:${c.border}">${c.label}</span>
+      <span class="file-brief">${f.brief}</span>
+    </div>`;
+  }).join('');
+}
+
+function selectFile(id) {
+  activeFile = activeFile === id ? null : id;
+  document.querySelectorAll('.file-row').forEach(r =>
+    r.classList.toggle('active', r.id === 'row-' + activeFile)
+  );
+  renderDetail();
+}
+
+function filterCategory(cat) {
+  activeCategory = activeCategory === cat ? null : cat;
+
+  document.querySelectorAll('.cat-pill').forEach(p => {
+    const k = p.id.replace('pill-', '');
+    p.style.opacity = (activeCategory && k !== activeCategory) ? '0.3' : '1';
+  });
+  document.querySelectorAll('.file-row').forEach(r => {
+    const k = r.dataset.cat;
+    const dim = activeCategory && k !== activeCategory;
+    r.style.opacity = dim ? '0.2' : '1';
+    r.style.pointerEvents = dim ? 'none' : 'auto';
+  });
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detailPanel');
+
+  panel.classList.remove('animated');
+  void panel.offsetWidth; // reflow to restart animation
+
+  if (!activeFile) {
+    panel.style.borderColor = '#e5e7eb';
+    panel.style.background = '#ffffff';
+    panel.innerHTML = '<div class="detail-empty">Click any file or folder above to see a detailed explanation of its role in the project.</div>';
+    return;
+  }
+
+  const f = FILES.find(x => x.id === activeFile);
+  const c = CAT[f.cat];
+
+  panel.style.borderColor = c.border;
+  panel.style.background = `linear-gradient(135deg, ${c.bg}80, #ffffff)`;
+  panel.classList.add('animated');
+  panel.innerHTML = `
+    <div class="detail-header">
+      <span class="detail-icon">${f.icon}</span>
+      <div class="detail-meta">
+        <span class="detail-name" style="color:${c.color}">${f.name}</span>
+        <span class="detail-badge" style="background:${c.bg};color:${c.color};border-color:${c.border}">${c.label}</span>
+      </div>
+    </div>
+    <div class="detail-desc">${f.desc}</div>
+    <div class="detail-tip" style="border-color:${c.color};background:${c.bg};color:${c.color}">
+      <span>💡</span>
+      <span><strong>Tip:</strong> ${f.tip}</span>
+    </div>`;
+}
+
+buildLegend();
+buildTree();
+</script>
+</body>
+</html>
