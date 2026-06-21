@@ -12,6 +12,13 @@ html, body {
 
 body {
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.app-body {
+    display: flex;
+    flex: 1;
     overflow: hidden;
 }
 
@@ -670,7 +677,7 @@ body {
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-    body {
+    .app-body {
         flex-direction: column;
     }
 
