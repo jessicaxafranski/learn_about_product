@@ -24,7 +24,8 @@ var pageFiles = {
     'hiring-manager-prompts':      'interviews/hiring-manager-prompts.md',
     'case-interview-guide':        'interviews/case-interview-guide.md',
     'product-podcasts':            'resources/product-podcasts.md',
-    'ai-assisted-pb':              'product-case/ai-assisted-pb.md'
+    'ai-assisted-pb':              'product-case/ai-assisted-pb.md',
+    'compliance-rag-case':         'product-case/compliance-rag-case.md'
 };
 
 var htmlPages = {
