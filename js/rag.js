@@ -26,7 +26,7 @@ function cosine(a, b) {
 
 async function initRAG() {
     const input = document.getElementById('searchInput');
-    input.placeholder = 'Loading AI search...';
+    input.placeholder = 'Warming up AI search...';
 
     // STEP 3: Load a small embedding model that runs entirely in the browser
     // Xenova/all-MiniLM-L6-v2 — ~25MB, cached after first load

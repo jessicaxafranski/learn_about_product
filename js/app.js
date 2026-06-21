@@ -56,7 +56,7 @@ function renderMarkdown(content) {
 function showHome() {
     currentPage = 'home';
     document.getElementById('homeContent').style.display = 'grid';
-    document.getElementById('contentMarkdown').style.display = 'none';
+    document.getElementById('pageWrapper').style.display = 'none';
     document.getElementById('contentIframe').style.display = 'none';
     document.getElementById('pageTitle').textContent = 'Learn About Product';
     updateActiveNav('home');
@@ -67,7 +67,7 @@ function showHtmlPage(pageKey) {
     if (!htmlPages[pageKey]) return;
     currentPage = pageKey;
     document.getElementById('homeContent').style.display = 'none';
-    document.getElementById('contentMarkdown').style.display = 'none';
+    document.getElementById('pageWrapper').style.display = 'none';
     var iframe = document.getElementById('contentIframe');
     iframe.src = htmlPages[pageKey];
     iframe.style.display = 'block';
@@ -96,8 +96,9 @@ function showPage(pageKey) {
         })
         .catch(function() {
             document.getElementById('homeContent').style.display = 'none';
-            document.getElementById('contentMarkdown').style.display = 'block';
+            document.getElementById('pageWrapper').style.display = 'flex';
             document.getElementById('contentMarkdown').innerHTML = '<p style="color:#6b7280;padding:20px">Page not found.</p>';
+            document.getElementById('tocPanel').style.display = 'none';
         });
 }
 
@@ -105,8 +106,9 @@ function displayPage(pageKey, content) {
     currentPage = pageKey;
     document.getElementById('homeContent').style.display = 'none';
     document.getElementById('contentIframe').style.display = 'none';
+    document.getElementById('pageWrapper').style.display = 'flex';
+
     var contentDiv = document.getElementById('contentMarkdown');
-    contentDiv.style.display = 'block';
     contentDiv.innerHTML = renderMarkdown(content);
 
     var wordCount = content.replace(/[#*`>\[\]_~]/g, '').split(/\s+/).filter(function(w) { return w.length > 0; }).length;
@@ -115,6 +117,28 @@ function displayPage(pageKey, content) {
     meta.className = 'page-meta';
     meta.textContent = readingTime + ' min read';
     contentDiv.insertBefore(meta, contentDiv.firstChild);
+
+    var toc = document.getElementById('tocPanel');
+    var headings = contentDiv.querySelectorAll('h2');
+    if (headings.length > 1) {
+        toc.innerHTML = '<div class="toc-title">On this page</div>';
+        headings.forEach(function(h, i) {
+            h.id = 'section-' + i;
+            var link = document.createElement('a');
+            link.className = 'toc-item';
+            link.textContent = h.textContent;
+            link.onclick = function(e) {
+                e.preventDefault();
+                var container = document.getElementById('contentArea');
+                var top = h.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop - 20;
+                container.scrollTo({ top: top, behavior: 'smooth' });
+            };
+            toc.appendChild(link);
+        });
+        toc.style.display = 'block';
+    } else {
+        toc.style.display = 'none';
+    }
 
     var titleMatch = content.match(/^# (.+)$/m);
     document.getElementById('pageTitle').textContent = titleMatch ? titleMatch[1] : pageKey;

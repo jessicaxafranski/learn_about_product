@@ -414,9 +414,54 @@ body {
     line-height: 1.55;
 }
 
+/* Page wrapper — markdown + TOC side by side */
+.page-wrapper {
+    display: flex;
+    gap: 56px;
+    align-items: flex-start;
+}
+
 /* Markdown content */
 .markdown-content {
+    flex: 1;
+    min-width: 0;
     max-width: 720px;
+}
+
+/* Table of contents */
+.toc-panel {
+    width: 180px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    padding-top: 2px;
+}
+
+.toc-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    margin-bottom: 12px;
+}
+
+.toc-item {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    text-decoration: none;
+    padding: 5px 0 5px 12px;
+    border-left: 2px solid #e5e7eb;
+    margin-bottom: 2px;
+    line-height: 1.4;
+    transition: all 0.15s;
+    cursor: pointer;
+}
+
+.toc-item:hover {
+    color: #7c3aed;
+    border-left-color: #7c3aed;
 }
 
 .page-meta {
@@ -644,6 +689,10 @@ body {
 
     .featured-card-icon {
         font-size: 24px;
+    }
+
+    .toc-panel {
+        display: none !important;
     }
 
     .markdown-content {
