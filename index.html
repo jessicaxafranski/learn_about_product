@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn About Product</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js" integrity="sha512-78KH17QLT5e55GJqP76vutp1D2iAoy06WcYBXB6iBCsmO6wWzx0Qdg8EDpm8mKXv68BcvHOyeeP4wxAL0twJGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
+        <div class="sidebar-avatar">JX</div>
         <h2 class="sidebar-title">Learning Hub</h2>
 
         <div class="search-box">
@@ -155,6 +158,14 @@
 
                 <div class="section-label">Explore by topic</div>
                 <div class="cards-grid">
+                    <div class="featured-card" onclick="showPage('rag-in-practice')">
+                        <div class="featured-card-icon">✦</div>
+                        <div>
+                            <div class="featured-card-label">Featured</div>
+                            <h3>RAG in Practice</h3>
+                            <p>How this site uses in-browser semantic search with no backend and no API key — a full implementation walkthrough including the bugs.</p>
+                        </div>
+                    </div>
                     <div class="category-card" onclick="showPage('critical-thinking')">
                         <div class="category-card-emoji">🗺️</div>
                         <h3>Product Strategy</h3>

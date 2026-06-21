@@ -105,8 +105,17 @@ function displayPage(pageKey, content) {
     currentPage = pageKey;
     document.getElementById('homeContent').style.display = 'none';
     document.getElementById('contentIframe').style.display = 'none';
-    document.getElementById('contentMarkdown').style.display = 'block';
-    document.getElementById('contentMarkdown').innerHTML = renderMarkdown(content);
+    var contentDiv = document.getElementById('contentMarkdown');
+    contentDiv.style.display = 'block';
+    contentDiv.innerHTML = renderMarkdown(content);
+
+    var wordCount = content.replace(/[#*`>\[\]_~]/g, '').split(/\s+/).filter(function(w) { return w.length > 0; }).length;
+    var readingTime = Math.max(1, Math.ceil(wordCount / 200));
+    var meta = document.createElement('div');
+    meta.className = 'page-meta';
+    meta.textContent = readingTime + ' min read';
+    contentDiv.insertBefore(meta, contentDiv.firstChild);
+
     var titleMatch = content.match(/^# (.+)$/m);
     document.getElementById('pageTitle').textContent = titleMatch ? titleMatch[1] : pageKey;
     updateActiveNav(pageKey);
