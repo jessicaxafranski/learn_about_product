@@ -35,6 +35,9 @@ Response grounded in real data
 
 The model does not search the internet. It searches a pre-built index of documents you control.
 
+![RAG Workflow](ai/images/rag_ibm.png)
+*RAG workflow — Source: IBM Documentation*
+
 ![RAG Architecture Diagram](ai/images/rag_architecture.png)
 *Source: IBM*
 
@@ -70,7 +73,7 @@ The vectors are saved to a **vector database** (e.g. Pinecone, Weaviate, pgvecto
 
 ---
 
-### What a Chunk Looks Like
+## What a Chunk Looks Like
 
 Every stored chunk contains three parts:
 
@@ -132,6 +135,47 @@ Use RAG when the answer lives in your data. Use fine-tuning when the behavior ne
 | **Longer response time** | Adding a retrieval step before generation introduces latency, especially when searching large document sets |
 | **Integration complexity** | Setting up chunking, embeddings, a vector store, and a retriever requires more infrastructure than a simple LLM call |
 | **Computational cost** | Embedding queries and running similarity searches in real time consumes resources — the larger the knowledge base, the higher the cost |
+
+---
+
+## RAG for Private and Sensitive Data
+
+RAG is most powerful when dealing with data that cannot be shared with public models.
+
+- **Internal documents** — contracts, financial data, product decisions, client data
+- **Proprietary knowledge bases** — Confluence, Notion, Drive, support history
+- **User research** — interviews, feedback, specs that live nowhere on the internet
+- **Frequently changing data** — pricing, regulations, internal policies
+
+The LLM does not know what happens inside your company, and you cannot send everything to a public API for security and privacy reasons. RAG solves this — the system runs in a controlled environment and the model only responds based on your data, without exposing anything.
+
+---
+
+## RAG in Market Analysis and Product Development
+
+RAG systems can access current market trends, consumer preferences, competitor activities, technical specifications, and patent databases — helping LLMs generate relevant and informed insights instead of relying on static training data.
+
+For product teams specifically, RAG acts as an always-updated research assistant:
+
+| Stage | What RAG enables |
+|---|---|
+| **Discovery** | Retrieves past user research, interview notes, and support tickets on demand |
+| **Refinement** | Cross-references technical specs, existing decisions, and consumer feedback to flag conflicts early |
+| **Market monitoring** | Synthesizes competitor reports and trend data in seconds, replacing hours of manual research |
+
+**Real-world example:** A company exploring a new smartphone launch uses RAG to extract recent consumer reviews and identify trending features across the industry. The LLM synthesizes this data to generate strategic recommendations covering design, pricing, and marketing — all grounded in current, verified information.
+
+---
+
+## Who Uses RAG Today
+
+| Industry | Example |
+|---|---|
+| **Finance** | JPMorgan and Goldman Sachs use RAG for searching contracts, regulations, and internal reports. Bloomberg built Bloomberg GPT with RAG over proprietary financial data |
+| **Healthcare** | Hospitals and insurers use RAG to search clinical records and guidelines without exposing patient data. Epic Systems integrated RAG into its platform |
+| **Legal** | Law firms use RAG to search case law and internal contracts. Harvey AI, used by firms like Allen & Overy, is a well-known example |
+| **E-commerce & Support** | Shopify uses RAG for customer support. Salesforce integrated RAG into Einstein, their AI assistant |
+| **Technology** | Notion AI, Confluence AI, and SharePoint Copilot are essentially RAG over your own documents. GitHub Copilot uses similar concepts to search within your codebase |
 
 ---
 
@@ -197,5 +241,5 @@ The trade-off: the knowledge base must be **continuously maintained**. If the do
 
 ## Simple Mental Model
 
-> RAG = search engine + LLM  
+> RAG = search engine + LLM
 > You search your own documents, then ask an AI to synthesize what it found.
