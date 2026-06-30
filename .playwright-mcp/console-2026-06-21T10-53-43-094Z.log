@@ -1,4 +1,0 @@
-[     391ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8080/models/Xenova/all-MiniLM-L6-v2/tokenizer.json:0
-[     391ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8080/models/Xenova/all-MiniLM-L6-v2/tokenizer_config.json:0
-[     391ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8080/models/Xenova/all-MiniLM-L6-v2/config.json:0
-[    2324ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8080/models/Xenova/all-MiniLM-L6-v2/onnx/model_quantized.onnx:0
