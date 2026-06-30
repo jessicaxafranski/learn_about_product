@@ -1,6 +1,7 @@
 var pageFiles = {
     'critical-thinking':           'strategy/critical-thinking.md',
     'product-roadmap':             'strategy/product-roadmap.md',
+    'gtm-strategy':                'strategy/gtm-strategy.md',
     'data-driven-decisions':       'data-metrics/data-driven-decisions.md',
     'key-results':                 'data-metrics/key-results.md',
     'performance-indicators':      'data-metrics/performance-indicators.md',

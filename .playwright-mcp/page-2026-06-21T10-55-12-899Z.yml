@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - heading "Learning Hub" [level=2] [ref=e3]
+    - textbox "Loading AI search..." [ref=e5]
+    - generic [ref=e7] [cursor=pointer]: 👩‍🦰 Home
+    - generic [ref=e8]:
+      - generic [ref=e9] [cursor=pointer]:
+        - generic [ref=e10]: Product Strategy
+        - generic [ref=e11]: ▾
+      - generic:
+        - generic [ref=e12] [cursor=pointer]: Critical Thinking
+        - generic [ref=e13] [cursor=pointer]: Building a Product Roadmap
+    - generic [ref=e14]:
+      - generic [ref=e15] [cursor=pointer]:
+        - generic [ref=e16]: Data & Metrics
+        - generic [ref=e17]: ▾
+      - generic:
+        - generic [ref=e18] [cursor=pointer]: Why Data-Driven?
+        - generic [ref=e19] [cursor=pointer]: Performance Indicators
+        - generic [ref=e20] [cursor=pointer]: How to Create KRs
+        - generic [ref=e21] [cursor=pointer]: A/B Testing
+        - generic [ref=e22] [cursor=pointer]: Conversion Funnel
+        - generic [ref=e23] [cursor=pointer]: "Case Study: RandoSando"
+    - generic [ref=e24]:
+      - generic [ref=e25] [cursor=pointer]:
+        - generic [ref=e26]: Artificial Intelligence
+        - generic [ref=e27]: ▾
+      - generic:
+        - generic [ref=e28] [cursor=pointer]:
+          - generic [ref=e29]: Foundations
+          - generic [ref=e30]: ▾
+        - generic [ref=e31]:
+          - generic [ref=e32] [cursor=pointer]: Generative AI for PMs
+          - generic [ref=e33] [cursor=pointer]: AI Biases & Critical Thinking
+          - generic [ref=e34] [cursor=pointer]: AI Agents
+          - generic [ref=e35] [cursor=pointer]: Prompt Anatomy
+          - generic [ref=e36]:
+            - text: LLMs
+            - generic [ref=e37]: soon
+        - generic [ref=e38] [cursor=pointer]:
+          - generic [ref=e39]: In Practice
+          - generic [ref=e40]: ▾
+        - generic [ref=e41]:
+          - generic [ref=e42] [cursor=pointer]: AI Tools End-to-End
+          - generic [ref=e43] [cursor=pointer]: N8N Workflow
+          - generic [ref=e44] [cursor=pointer]: AI Across the Product Lifecycle
+          - generic [ref=e45] [cursor=pointer]: AI-Assisted Product Builder
+          - generic [ref=e46] [cursor=pointer]: RAG
+        - generic [ref=e47] [cursor=pointer]:
+          - generic [ref=e48]: Claude Code
+          - generic [ref=e49]: ▾
+        - generic [ref=e50]:
+          - generic [ref=e51] [cursor=pointer]: Building Blocks
+          - generic [ref=e52] [cursor=pointer]:
+            - text: Configuration Layers
+            - generic [ref=e53]: ⚡
+          - generic [ref=e54] [cursor=pointer]:
+            - text: Project Structure
+            - generic [ref=e55]: ⚡
+          - generic [ref=e56] [cursor=pointer]: Prompt Injection
+          - generic [ref=e57] [cursor=pointer]: Commands
+          - generic [ref=e58] [cursor=pointer]:
+            - text: AI OS Builder
+            - generic [ref=e59]: ⚡
+          - generic [ref=e60]:
+            - text: MCP
+            - generic [ref=e61]: soon
+    - generic [ref=e62]:
+      - generic [ref=e63] [cursor=pointer]:
+        - generic [ref=e64]: Technical
+        - generic [ref=e65]: ▾
+      - generic [ref=e66] [cursor=pointer]: What Is an API?
+    - generic [ref=e67]:
+      - generic [ref=e68] [cursor=pointer]:
+        - generic [ref=e69]: Interviews
+        - generic [ref=e70]: ▾
+      - generic:
+        - generic [ref=e71] [cursor=pointer]: Hiring Manager Prompts
+        - generic [ref=e72] [cursor=pointer]: Case Interview Guide
+    - generic [ref=e73]:
+      - generic [ref=e74] [cursor=pointer]:
+        - generic [ref=e75]: Resources
+        - generic [ref=e76]: ▾
+      - generic [ref=e77] [cursor=pointer]: Product Podcasts
+  - generic [ref=e78]:
+    - heading "Learn About Product" [level=1] [ref=e80]
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - generic [ref=e84]: Personal Learning Hub
+        - heading "Product, Strategy & Growth" [level=1] [ref=e85]
+        - paragraph [ref=e86]: I'm a Product Manager documenting what I learn — from data and metrics to AI tools, technical foundations, and interview prep. This is my personal knowledge base, built in public.
+        - generic [ref=e87]:
+          - link "LinkedIn" [ref=e88] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/jessica-xafranski/
+            - img [ref=e89]
+            - text: LinkedIn
+          - link "Get in touch" [ref=e91] [cursor=pointer]:
+            - /url: mailto:jessicaxafranski@gmail.com
+            - img [ref=e92]
+            - text: Get in touch
+        - separator [ref=e94]
+      - generic [ref=e95]: Explore by topic
+      - generic [ref=e96]:
+        - generic [ref=e97] [cursor=pointer]:
+          - generic [ref=e98]: 🗺️
+          - heading "Product Strategy" [level=3] [ref=e99]
+          - paragraph [ref=e100]: Critical thinking frameworks and how to build roadmaps aligned with business goals.
+        - generic [ref=e101] [cursor=pointer]:
+          - generic [ref=e102]: 📊
+          - heading "Data & Metrics" [level=3] [ref=e103]
+          - paragraph [ref=e104]: Data-driven decisions, KRs, A/B testing, and measurement frameworks.
+        - generic [ref=e105] [cursor=pointer]:
+          - generic [ref=e106]: 🔽
+          - heading "Analytics in Practice" [level=3] [ref=e107]
+          - paragraph [ref=e108]: Conversion funnels, case studies, and applied analytics for real product decisions.
+        - generic [ref=e109] [cursor=pointer]:
+          - generic [ref=e110]: 🤖
+          - heading "AI for Product" [level=3] [ref=e111]
+          - paragraph [ref=e112]: How generative AI tools enhance PM work, their biases, and when to apply them.
+        - generic [ref=e113] [cursor=pointer]:
+          - generic [ref=e114]: 🔧
+          - heading "Technical Foundations" [level=3] [ref=e115]
+          - paragraph [ref=e116]: Non-technical explanations of APIs and the concepts PMs need to work with engineers.
+        - generic [ref=e117] [cursor=pointer]:
+          - generic [ref=e118]: 💼
+          - heading "Interviews & Career" [level=3] [ref=e119]
+          - paragraph [ref=e120]: Case guides, behavioral questions, and strategies to prepare for PM interviews.
+        - generic [ref=e121] [cursor=pointer]:
+          - generic [ref=e122]: 🚀
+          - heading "Product Cases" [level=3] [ref=e123]
+          - paragraph [ref=e124]: End-to-end product builds, from idea to live execution, combining product thinking and AI.

@@ -1,6 +1,7 @@
 # Conversion Funnel
 ### A practical guide for Product Managers
-**Product Hub | Product 101**
+
+> 📌 **Note:** This content is based on my personal notes from a presentation by **Jessica Wulf** at **Ladies in Product Barcelona**, where she walked through funnel techniques applied to different business scenarios. The examples and frameworks here reflect my interpretation and learning from that session.
 
 ---
 

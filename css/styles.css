@@ -116,24 +116,27 @@ body {
 }
 
 .nav-item {
-    padding: 7px 10px;
-    margin-bottom: 2px;
+    padding: 7px 30px;
+    margin: 0 -20px 1px -20px;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 0;
     font-size: 13.5px;
     color: #4b5563;
-    transition: all 0.15s;
+    transition: background 0.15s, color 0.15s;
+    border-left: 3px solid transparent;
 }
 
 .nav-item:hover {
     background-color: #ede9fe;
     color: #5b21b6;
+    border-left-color: #c4b5fd;
 }
 
 .nav-item.active {
     background-color: #ede9fe;
     color: #5b21b6;
     font-weight: 600;
+    border-left-color: #7c3aed;
 }
 
 .nav-sub-title {
@@ -149,10 +152,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px;
+    padding: 6px 20px;
+    margin: 8px -20px 2px -20px;
     cursor: pointer;
-    border-radius: 6px;
-    margin: 8px 0 2px 0;
+    border-radius: 0;
     transition: background 0.15s;
 }
 
@@ -160,19 +163,28 @@ body {
     background: #f3f0ff;
 }
 
+.nav-group-header:hover .nav-group-label {
+    color: #7c3aed;
+}
+
+.nav-group-header:hover .nav-group-arrow {
+    color: #7c3aed;
+}
+
 .nav-group-label {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #c4b5fd;
+    color: #9ca3af;
     letter-spacing: 0.08em;
 }
 
 .nav-group-arrow {
-    font-size: 9px;
-    color: #c4b5fd;
-    transition: transform 0.2s;
+    font-size: 14px;
+    color: #9ca3af;
+    transition: transform 0.2s, color 0.15s;
     line-height: 1;
+    flex-shrink: 0;
 }
 
 .nav-group-arrow.collapsed {
@@ -588,7 +600,8 @@ body {
     background: white;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    display: block;
     font-size: 14px;
 }
 
