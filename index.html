@@ -6,7 +6,7 @@
     <title>Learn About Product</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.7/purify.min.js" integrity="sha512-78KH17QLT5e55GJqP76vutp1D2iAoy06WcYBXB6iBCsmO6wWzx0Qdg8EDpm8mKXv68BcvHOyeeP4wxAL0twJGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -14,10 +14,17 @@
 
     <div class="header">
         <div class="header-brand" onclick="showHome()">
-            <span class="header-emoji">👩‍🦰</span>
+            <img src="ai/images/jess_avatar.png" class="header-avatar" alt="Jess">
             <span class="header-name">Jess Builds</span>
         </div>
-        <h1 id="pageTitle" class="header-page-title">Learn About Product</h1>
+        <div class="header-search-wrap">
+            <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Search topics...">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+        <h1 id="pageTitle" class="header-page-title" aria-hidden="true"></h1>
         <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()">☰</button>
     </div>
 
@@ -25,18 +32,12 @@
 
         <div class="sidebar" id="sidebar">
 
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <div class="search-results" id="searchResults"></div>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-item active" onclick="showHome()" data-page="home">👩‍🦰 Home</div>
-            </div>
-
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('product-strategy')">
-                    <span class="nav-section-title">Product Strategy</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span>
+                        <span class="nav-section-title">Product Strategy</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="product-strategy-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="product-strategy-body">
@@ -48,7 +49,10 @@
 
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('data-metrics')">
-                    <span class="nav-section-title">Data &amp; Metrics</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></span>
+                        <span class="nav-section-title">Data &amp; Metrics</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="data-metrics-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="data-metrics-body">
@@ -63,7 +67,10 @@
 
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('ai-main')">
-                    <span class="nav-section-title">Artificial Intelligence</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span>
+                        <span class="nav-section-title">Artificial Intelligence</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="ai-main-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="ai-main-body">
@@ -113,17 +120,25 @@
 
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('technical')">
-                    <span class="nav-section-title">Technical</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+                        <span class="nav-section-title">Technical</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="technical-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="technical-body">
                     <div class="nav-item" onclick="showPage('what-is-an-api')" data-page="what-is-an-api">What Is an API?</div>
+                    <div class="nav-item" onclick="showPage('api-restful')" data-page="api-restful">RESTful APIs</div>
+                    <div class="nav-item" onclick="showPage('api-metrics')" data-page="api-metrics">API Metrics</div>
                 </div>
             </div>
 
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('interviews')">
-                    <span class="nav-section-title">Interviews</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                        <span class="nav-section-title">Interviews</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="interviews-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="interviews-body">
@@ -134,7 +149,10 @@
 
             <div class="nav-section">
                 <div class="nav-section-header" onclick="toggleGroup('resources')">
-                    <span class="nav-section-title">Resources</span>
+                    <div class="nav-section-header-left">
+                        <span class="nav-section-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+                        <span class="nav-section-title">Resources</span>
+                    </div>
                     <span class="nav-group-arrow collapsed" id="resources-arrow">▾</span>
                 </div>
                 <div class="nav-group-body collapsed" id="resources-body">
@@ -220,7 +238,10 @@
                 </div>
 
                 <div id="pageWrapper" class="page-wrapper" style="display:none;">
-                    <div id="contentMarkdown" class="markdown-content"></div>
+                    <div class="page-content-col">
+                        <nav id="breadcrumbNav" class="breadcrumb-nav" style="display:none;" aria-label="breadcrumb"></nav>
+                        <div id="contentMarkdown" class="markdown-content"></div>
+                    </div>
                     <nav id="tocPanel" class="toc-panel" style="display:none;"></nav>
                 </div>
                 <iframe id="contentIframe" style="display:none;border:none;width:100%;height:100%;" src=""></iframe>

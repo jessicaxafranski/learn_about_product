@@ -22,6 +22,8 @@ var pageFiles = {
     'prompt-injection':            'ai/claude/prompt_injection.md',
     'claude-commands':             'ai/claude/commands.md',
     'what-is-an-api':              'technical/what-is-an-api.md',
+    'api-restful':                 'technical/API-restful.md',
+    'api-metrics':                 'technical/API-metrics.md',
     'hiring-manager-prompts':      'interviews/hiring-manager-prompts.md',
     'case-interview-guide':        'interviews/case-interview-guide.md',
     'product-podcasts':            'resources/product-podcasts.md',
@@ -40,6 +42,70 @@ var htmlPageTitles = {
     'project-structure':'Project Folder Structure',
     'building-projects':'Configuration Layers'
 };
+
+var breadcrumbMap = {
+    'critical-thinking':           ['Product Strategy', 'Critical Thinking'],
+    'product-roadmap':             ['Product Strategy', 'Building a Product Roadmap'],
+    'gtm-strategy':                ['Product Strategy', 'GTM Strategy'],
+    'data-driven-decisions':       ['Data & Metrics', 'Why Data-Driven?'],
+    'performance-indicators':      ['Data & Metrics', 'Performance Indicators'],
+    'key-results':                 ['Data & Metrics', 'How to Create KRs'],
+    'ab-testing':                  ['Data & Metrics', 'A/B Testing'],
+    'funnel':                      ['Data & Metrics', 'Conversion Funnel'],
+    'product-kpis-case-study':     ['Data & Metrics', 'Case Study: RandoSando'],
+    'analytics-structure':         ['Data & Metrics', 'Analytics Structure'],
+    'generative-ai-for-pms':       ['Artificial Intelligence', 'Foundations', 'Generative AI for PMs'],
+    'ai-biases-critical-thinking': ['Artificial Intelligence', 'Foundations', 'AI Biases & Critical Thinking'],
+    'ai-agents':                   ['Artificial Intelligence', 'Foundations', 'AI Agents'],
+    'prompt-anatomy':              ['Artificial Intelligence', 'Foundations', 'Prompt Anatomy'],
+    'ai-tools-end-to-end':         ['Artificial Intelligence', 'In Practice', 'AI Tools End-to-End'],
+    'n8n':                         ['Artificial Intelligence', 'In Practice', 'N8N Workflow'],
+    'rag':                         ['Artificial Intelligence', 'In Practice', 'RAG'],
+    'rag-in-practice':             ['Artificial Intelligence', 'In Practice', 'RAG in Practice'],
+    'project-layer':               ['Artificial Intelligence', 'In Practice', 'AI Across the Product Lifecycle'],
+    'ai-assisted-pb':              ['Artificial Intelligence', 'In Practice', 'AI-Assisted Product Builder'],
+    'compliance-rag-case':         ['Artificial Intelligence', 'In Practice', 'Case: RAG for Compliance'],
+    'claude-building-blocks':      ['Artificial Intelligence', 'Claude Code', 'Building Blocks'],
+    'building-projects':           ['Artificial Intelligence', 'Claude Code', 'Configuration Layers'],
+    'project-structure':           ['Artificial Intelligence', 'Claude Code', 'Project Structure'],
+    'prompt-injection':            ['Artificial Intelligence', 'Claude Code', 'Prompt Injection'],
+    'claude-commands':             ['Artificial Intelligence', 'Claude Code', 'Commands'],
+    'ai-os-builder':               ['Artificial Intelligence', 'Claude Code', 'AI OS Builder'],
+    'what-is-an-api':              ['Technical', 'What Is an API?'],
+    'api-restful':                 ['Technical', 'RESTful APIs'],
+    'api-metrics':                 ['Technical', 'API Metrics'],
+    'hiring-manager-prompts':      ['Interviews', 'Hiring Manager Prompts'],
+    'case-interview-guide':        ['Interviews', 'Case Interview Guide'],
+    'product-podcasts':            ['Resources', 'Product Podcasts'],
+};
+
+function buildBreadcrumb(pageKey) {
+    var nav = document.getElementById('breadcrumbNav');
+    var path = breadcrumbMap[pageKey];
+    if (!path) { nav.style.display = 'none'; return; }
+
+    nav.innerHTML = '';
+    nav.style.display = 'flex';
+
+    var home = document.createElement('span');
+    home.className = 'breadcrumb-item';
+    home.textContent = 'Home';
+    home.onclick = showHome;
+    nav.appendChild(home);
+
+    for (var i = 0; i < path.length; i++) {
+        var sep = document.createElement('span');
+        sep.className = 'breadcrumb-sep';
+        sep.textContent = '/';
+        nav.appendChild(sep);
+
+        var item = document.createElement('span');
+        var isLast = i === path.length - 1;
+        item.className = isLast ? 'breadcrumb-current' : 'breadcrumb-item';
+        item.textContent = path[i];
+        nav.appendChild(item);
+    }
+}
 
 var pageCache = {};
 var searchIndex = {};
@@ -60,8 +126,9 @@ function showHome() {
     document.getElementById('homeContent').style.display = 'grid';
     document.getElementById('pageWrapper').style.display = 'none';
     document.getElementById('contentIframe').style.display = 'none';
+    document.getElementById('breadcrumbNav').style.display = 'none';
     document.getElementById('pageTitle').textContent = 'Learn About Product';
-    updateActiveNav('home');
+    updateActiveNav(null);
     if (window.innerWidth <= 768) closeSidebar();
 }
 
@@ -70,6 +137,7 @@ function showHtmlPage(pageKey) {
     currentPage = pageKey;
     document.getElementById('homeContent').style.display = 'none';
     document.getElementById('pageWrapper').style.display = 'none';
+    document.getElementById('breadcrumbNav').style.display = 'none';
     var iframe = document.getElementById('contentIframe');
     iframe.src = htmlPages[pageKey];
     iframe.style.display = 'block';
@@ -109,6 +177,7 @@ function displayPage(pageKey, content) {
     document.getElementById('homeContent').style.display = 'none';
     document.getElementById('contentIframe').style.display = 'none';
     document.getElementById('pageWrapper').style.display = 'flex';
+    buildBreadcrumb(pageKey);
 
     var contentDiv = document.getElementById('contentMarkdown');
     contentDiv.innerHTML = renderMarkdown(content);
@@ -294,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200);
     });
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.search-box')) {
+        if (!e.target.closest('.header-search-wrap')) {
             document.getElementById('searchResults').classList.remove('show');
         }
     });
