@@ -62,10 +62,11 @@ body {
 
 /* Header search (moved from sidebar) */
 .header-search-wrap {
-    flex: 1;
-    max-width: 460px;
-    position: relative;
-    margin: 0 24px;
+    position: absolute;
+    left: 264px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(420px, calc(100% - 320px));
 }
 
 .header-search-icon {
@@ -692,15 +693,17 @@ body {
     border-radius: 0 6px 6px 0;
 }
 
+.table-scroll {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
 .markdown-content table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
     background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow-x: auto;
-    display: block;
     font-size: 14px;
 }
 
@@ -819,6 +822,14 @@ body {
 
     .hamburger {
         display: block;
+    }
+
+    .header-search-wrap {
+        position: static;
+        transform: none;
+        flex: 1;
+        width: auto;
+        margin: 0 16px;
     }
 
     .header-page-title {

@@ -2,6 +2,7 @@ var pageFiles = {
     'critical-thinking':           'strategy/critical-thinking.md',
     'product-roadmap':             'strategy/product-roadmap.md',
     'gtm-strategy':                'strategy/gtm-strategy.md',
+    'product-discovery':           'product-discovery/product-discovery.md',
     'data-driven-decisions':       'data-metrics/data-driven-decisions.md',
     'key-results':                 'data-metrics/key-results.md',
     'performance-indicators':      'data-metrics/performance-indicators.md',
@@ -47,6 +48,7 @@ var breadcrumbMap = {
     'critical-thinking':           ['Product Strategy', 'Critical Thinking'],
     'product-roadmap':             ['Product Strategy', 'Building a Product Roadmap'],
     'gtm-strategy':                ['Product Strategy', 'GTM Strategy'],
+    'product-discovery':           ['Product Discovery', 'Product Discovery'],
     'data-driven-decisions':       ['Data & Metrics', 'Why Data-Driven?'],
     'performance-indicators':      ['Data & Metrics', 'Performance Indicators'],
     'key-results':                 ['Data & Metrics', 'How to Create KRs'],
@@ -119,6 +121,16 @@ function renderMarkdown(content) {
     return html.replace(/<a href=/g, '<a target="_blank" rel="noopener noreferrer" href=');
 }
 
+function wrapTables(container) {
+    var tables = container.querySelectorAll('table');
+    tables.forEach(function(table) {
+        var wrap = document.createElement('div');
+        wrap.className = 'table-scroll';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+    });
+}
+
 // --- Navigation ---
 
 function showHome() {
@@ -181,6 +193,7 @@ function displayPage(pageKey, content) {
 
     var contentDiv = document.getElementById('contentMarkdown');
     contentDiv.innerHTML = renderMarkdown(content);
+    wrapTables(contentDiv);
 
     var wordCount = content.replace(/[#*`>\[\]_~]/g, '').split(/\s+/).filter(function(w) { return w.length > 0; }).length;
     var readingTime = Math.max(1, Math.ceil(wordCount / 200));
