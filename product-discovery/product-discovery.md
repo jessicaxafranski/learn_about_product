@@ -103,6 +103,20 @@ Both formats are valid — the right choice depends on what you're trying to lea
 
 ---
 
+## Discovery Depends on a Real PM–UX Partnership
+
+None of the above works without a strong relationship between product and design. This is something I've felt directly in my own experience working with UX.
+
+A lot of companies push back on research because it's expensive and slow — sometimes you're literally paying the people you're interviewing, and that cost is an easy line item to cut. A big part of the PM's job ends up being negotiation, not research itself: making the case for why the research needs to happen, protecting the scope so those steps don't quietly disappear from the timeline, and translating "we need to talk to users" into something the business will actually fund.
+
+The best product-design partnership I've had worked because we planned together, not in sequence. We'd sit down to build a feature roadmap and both bring something different to the table: design brought what they expected from a feature and the metrics they were aiming for, and I brought the user-impact lens — how this would actually land for the person using it. Some features will never move a revenue metric, but they matter enormously to the user, and that's a case worth making. Getting that included in the roadmap took negotiation, not just good intentions.
+
+> **Rule: PM and design shouldn't be sequential — design handed a decision after the fact. The best products come from sitting down and planning together from day one.**
+
+The other half of this is that the PM has to carry the business vision to the *entire* team, not just design. It's easy for an engineer to be heads-down shipping code without much visibility into why a given metric matters. Part of the job is making sure that when someone points out a metric is underperforming, the team's instinct is "what can we do to improve this" — not something only the PM is expected to solve. That mindset doesn't happen on its own; the PM has to actively teach it, though it works a lot better with backing from leadership and a team culture that already leaves room for it.
+
+---
+
 ## Other Things That Make Discovery Actually Good
 
 - **Recruit the right participants.** A great interview with the wrong person teaches you nothing. Write a screener that filters for the actual behavior you care about, not just a demographic.
